@@ -153,6 +153,9 @@
     <ClInclude Include="..\include\flappy_box\view\box_gl_drawable.hpp">
       <Filter>Header Files\flappy_box\view</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\tiny_obj_loader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\model\game.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="..\src\flappy_box\view\box_gl_drawable.cpp">
       <Filter>Source Files\flappy_box\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tiny_obj_loader.cc">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

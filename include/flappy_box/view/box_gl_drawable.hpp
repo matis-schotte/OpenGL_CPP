@@ -3,7 +3,7 @@
 # include "../../view/gl_renderer.hpp"
 # include "../../flappy_box/model/box.hpp"
 
-#include "tiny_obj_loader.h"
+#include "../../tiny_obj_loader.h"
 
 namespace flappy_box
 {

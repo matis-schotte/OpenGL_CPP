@@ -27,7 +27,10 @@
 		1AA285D0195B23D400069C1A /* libglut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA285CF195B23D400069C1A /* libglut.dylib */; };
 		1AA285D2195B23DC00069C1A /* libalut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA285D1195B23DC00069C1A /* libalut.dylib */; };
 		1AA285D5195B29EC00069C1A /* libGLEW.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA285D4195B29EC00069C1A /* libGLEW.dylib */; };
-		1ABA493619642DAB003AA52A /* tiny_obj_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493419642DAB003AA52A /* tiny_obj_loader.cc */; };
+		1ABA493619642DAB003AA52A /* tiny_obj_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493419642DAB003AA52A /* tiny_obj_loader.cpp */; };
+		1ABA493D19643E22003AA52A /* paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493B19643E22003AA52A /* paddle.cpp */; };
+		1ABA494019643E3B003AA52A /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493E19643E3B003AA52A /* world.cpp */; };
+		1ABA494319643E65003AA52A /* game_over.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA494119643E65003AA52A /* game_over.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,9 +97,15 @@
 		1AA285E0195B345F00069C1A /* low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = low.wav; sourceTree = "<group>"; };
 		1AA285E1195B345F00069C1A /* synth.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = synth.wav; sourceTree = "<group>"; };
 		1AA285E2195B345F00069C1A /* thehead.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thehead.raw; sourceTree = "<group>"; };
-		1ABA493419642DAB003AA52A /* tiny_obj_loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cc; sourceTree = "<group>"; };
+		1ABA493419642DAB003AA52A /* tiny_obj_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cpp; sourceTree = "<group>"; };
 		1ABA493519642DAB003AA52A /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
 		1ABA493719642DBA003AA52A /* cppcube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cppcube.obj; sourceTree = "<group>"; };
+		1ABA493819643DA7003AA52A /* paddle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = paddle.hpp; sourceTree = "<group>"; };
+		1ABA493919643DD6003AA52A /* world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
+		1ABA493A19643DEE003AA52A /* game_over.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_over.hpp; sourceTree = "<group>"; };
+		1ABA493B19643E22003AA52A /* paddle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cpp; sourceTree = "<group>"; };
+		1ABA493E19643E3B003AA52A /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
+		1ABA494119643E65003AA52A /* game_over.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +147,7 @@
 		1AA28586195B204C00069C1A /* include */ = {
 			isa = PBXGroup;
 			children = (
+				1ABA493519642DAB003AA52A /* tiny_obj_loader.h */,
 				1AA28587195B204C00069C1A /* controller */,
 				1AA2858C195B204C00069C1A /* factory_map.hpp */,
 				1AA2858D195B204C00069C1A /* flappy_box */,
@@ -184,6 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				1AA28592195B204C00069C1A /* box.hpp */,
+				1ABA493819643DA7003AA52A /* paddle.hpp */,
+				1ABA493919643DD6003AA52A /* world.hpp */,
+				1ABA493A19643DEE003AA52A /* game_over.hpp */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -219,8 +232,7 @@
 		1AA285A0195B204C00069C1A /* src */ = {
 			isa = PBXGroup;
 			children = (
-				1ABA493519642DAB003AA52A /* tiny_obj_loader.h */,
-				1ABA493419642DAB003AA52A /* tiny_obj_loader.cc */,
+				1ABA493419642DAB003AA52A /* tiny_obj_loader.cpp */,
 				1AA285A1195B204C00069C1A /* controller */,
 				1AA285A5195B204C00069C1A /* flappy_box */,
 				1AA285AE195B204C00069C1A /* main.cpp */,
@@ -264,6 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				1AA285AA195B204C00069C1A /* box.cpp */,
+				1ABA493B19643E22003AA52A /* paddle.cpp */,
+				1ABA493E19643E3B003AA52A /* world.cpp */,
+				1ABA494119643E65003AA52A /* game_over.cpp */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -381,6 +396,9 @@
 				1AA285B7195B204C00069C1A /* engine.cpp in Sources */,
 				1AA285B8195B204C00069C1A /* glut_engine.cpp in Sources */,
 				1AA285B9195B204C00069C1A /* logic.cpp in Sources */,
+				1ABA494319643E65003AA52A /* game_over.cpp in Sources */,
+				1ABA493D19643E22003AA52A /* paddle.cpp in Sources */,
+				1ABA494019643E3B003AA52A /* world.cpp in Sources */,
 				1AA285BA195B204C00069C1A /* box_object_logic.cpp in Sources */,
 				1AA285BB195B204C00069C1A /* flappy_engine.cpp in Sources */,
 				1AA285BC195B204C00069C1A /* box.cpp in Sources */,
@@ -388,7 +406,7 @@
 				1AA285BE195B204C00069C1A /* box_gl_drawable.cpp in Sources */,
 				1AA285BF195B204C00069C1A /* main.cpp in Sources */,
 				1AA285C0195B204C00069C1A /* game.cpp in Sources */,
-				1ABA493619642DAB003AA52A /* tiny_obj_loader.cc in Sources */,
+				1ABA493619642DAB003AA52A /* tiny_obj_loader.cpp in Sources */,
 				1AA285C1195B204C00069C1A /* game_object.cpp in Sources */,
 				1AA285C2195B204C00069C1A /* sound_provider.cpp in Sources */,
 				1AA285C3195B204C00069C1A /* al_renderer.cpp in Sources */,

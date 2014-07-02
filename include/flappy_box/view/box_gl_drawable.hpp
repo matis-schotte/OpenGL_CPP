@@ -3,6 +3,8 @@
 # include "../../view/gl_renderer.hpp"
 # include "../../flappy_box/model/box.hpp"
 
+#include "tiny_obj_loader.h"
+
 namespace flappy_box
 {
     namespace view
@@ -17,6 +19,7 @@ namespace flappy_box
             
         private:
             std::shared_ptr< model::Box const > _model;
+            std::vector<tinyobj::shape_t> shapes;
             
         }; // BoxGlDrawable
     }

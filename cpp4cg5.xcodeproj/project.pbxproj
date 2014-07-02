@@ -27,6 +27,7 @@
 		1AA285D0195B23D400069C1A /* libglut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA285CF195B23D400069C1A /* libglut.dylib */; };
 		1AA285D2195B23DC00069C1A /* libalut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA285D1195B23DC00069C1A /* libalut.dylib */; };
 		1AA285D5195B29EC00069C1A /* libGLEW.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA285D4195B29EC00069C1A /* libGLEW.dylib */; };
+		1ABA493619642DAB003AA52A /* tiny_obj_loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493419642DAB003AA52A /* tiny_obj_loader.cc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +94,9 @@
 		1AA285E0195B345F00069C1A /* low.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = low.wav; sourceTree = "<group>"; };
 		1AA285E1195B345F00069C1A /* synth.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = synth.wav; sourceTree = "<group>"; };
 		1AA285E2195B345F00069C1A /* thehead.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thehead.raw; sourceTree = "<group>"; };
+		1ABA493419642DAB003AA52A /* tiny_obj_loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cc; sourceTree = "<group>"; };
+		1ABA493519642DAB003AA52A /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
+		1ABA493719642DBA003AA52A /* cppcube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cppcube.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +118,7 @@
 		1A5F6A59195B1EC6005EF12B = {
 			isa = PBXGroup;
 			children = (
+				1ABA493719642DBA003AA52A /* cppcube.obj */,
 				1AA28586195B204C00069C1A /* include */,
 				1AA285A0195B204C00069C1A /* src */,
 				1AA285D6195B345E00069C1A /* res */,
@@ -214,6 +219,8 @@
 		1AA285A0195B204C00069C1A /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1ABA493519642DAB003AA52A /* tiny_obj_loader.h */,
+				1ABA493419642DAB003AA52A /* tiny_obj_loader.cc */,
 				1AA285A1195B204C00069C1A /* controller */,
 				1AA285A5195B204C00069C1A /* flappy_box */,
 				1AA285AE195B204C00069C1A /* main.cpp */,
@@ -346,7 +353,7 @@
 		1A5F6A5B195B1EC6005EF12B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Matis Schotte";
 			};
 			buildConfigurationList = 1A5F6A5E195B1EC6005EF12B /* Build configuration list for PBXProject "cpp4cg5" */;
@@ -381,6 +388,7 @@
 				1AA285BE195B204C00069C1A /* box_gl_drawable.cpp in Sources */,
 				1AA285BF195B204C00069C1A /* main.cpp in Sources */,
 				1AA285C0195B204C00069C1A /* game.cpp in Sources */,
+				1ABA493619642DAB003AA52A /* tiny_obj_loader.cc in Sources */,
 				1AA285C1195B204C00069C1A /* game_object.cpp in Sources */,
 				1AA285C2195B204C00069C1A /* sound_provider.cpp in Sources */,
 				1AA285C3195B204C00069C1A /* al_renderer.cpp in Sources */,
@@ -396,7 +404,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -432,7 +439,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;

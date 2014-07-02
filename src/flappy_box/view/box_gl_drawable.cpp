@@ -42,8 +42,9 @@ void BoxGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         glRotated( 100., 1., 0., 0. );
         glRotated( -20, 0., 1., 0. );
         glRotated( 22.5, 0., 0., 1. );
+        glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
         
-        ::glBegin(GL_LINES);
+        ::glBegin(GL_TRIANGLES); // GL_LINES GL_TRIANGLES
         
         for (size_t i = 0; i < shapes.size(); i++)
             for(size_t f = 0; f < shapes[i].mesh.indices.size(); f++)

@@ -13,18 +13,14 @@ namespace flappy_box
         {
         public:
             
-            GameOver( const std::string& = "GameOver" );
+            GameOver( const int p, const std::string& = "GameOver" );
             
-            const double& angle() const { return _angle; }
-            void setAngle( double a ) { _angle = a; }
-            
-            const vec3_type& position() const { return _position; }
-            void setPosition( const vec3_type& p ) { _position = p; }
+            const int& playerPoints() const { return _playerPoints; }
+            // set-methode schlägt fehl, da const int -> unveränderbarer wert
             
         private:
             
-            double               _angle; // comment
-            vec3_type         _position;
+            const int                  _playerPoints;
             
         }; // GameOver
         

@@ -106,6 +106,7 @@
 		1ABA493B19643E22003AA52A /* paddle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cpp; sourceTree = "<group>"; };
 		1ABA493E19643E3B003AA52A /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
 		1ABA494119643E65003AA52A /* game_over.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over.cpp; sourceTree = "<group>"; };
+		1ABA49441964497E003AA52A /* -cppcube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "-cppcube.obj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +128,7 @@
 		1A5F6A59195B1EC6005EF12B = {
 			isa = PBXGroup;
 			children = (
+				1ABA49441964497E003AA52A /* -cppcube.obj */,
 				1ABA493719642DBA003AA52A /* cppcube.obj */,
 				1AA28586195B204C00069C1A /* include */,
 				1AA285A0195B204C00069C1A /* src */,

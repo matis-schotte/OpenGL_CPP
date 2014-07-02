@@ -42,6 +42,10 @@ namespace flappy_box
             const double& rotVelocity() const { return _rotVelocity; }
             void setRotVelocity( double rv ) { _rotVelocity = rv; }
             
+            static const vec3_type& gravitation() { static const vec3_type g(0.0, 0.0, -1.5); return g; };
+            
+            constexpr static const double decay = 0.8;
+            
         private:
             
             double               _angle;

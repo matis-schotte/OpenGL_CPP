@@ -4,7 +4,7 @@ using namespace flappy_box::model;
 
 World::World( const std::string& n )
 : GameObject( true, n )
-,           _angle( 0.0 )
-,        _position( 0.0, 0.0, 0.0 )
+,           _playerPoints( 0 )
+,         _remainingLives( 9 )
 {
 }

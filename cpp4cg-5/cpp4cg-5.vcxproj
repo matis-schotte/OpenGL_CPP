@@ -40,7 +40,11 @@
     <ClInclude Include="..\include\factory_map.hpp" />
     <ClInclude Include="..\include\flappy_box\controller\box_object_logic.hpp" />
     <ClInclude Include="..\include\flappy_box\controller\flappy_engine.hpp" />
+    <ClInclude Include="..\include\flappy_box\controller\paddle_logic.hpp" />
     <ClInclude Include="..\include\flappy_box\model\box.hpp" />
+    <ClInclude Include="..\include\flappy_box\model\game_over.hpp" />
+    <ClInclude Include="..\include\flappy_box\model\paddle.hpp" />
+    <ClInclude Include="..\include\flappy_box\model\world.hpp" />
     <ClInclude Include="..\include\flappy_box\view\box_al_audible.hpp" />
     <ClInclude Include="..\include\flappy_box\view\box_gl_drawable.hpp" />
     <ClInclude Include="..\include\math.hpp" />
@@ -48,10 +52,10 @@
     <ClInclude Include="..\include\model\game.hpp" />
     <ClInclude Include="..\include\model\game_object.hpp" />
     <ClInclude Include="..\include\sound_provider.hpp" />
+    <ClInclude Include="..\include\tiny_obj_loader.h" />
     <ClInclude Include="..\include\view\al_renderer.hpp" />
     <ClInclude Include="..\include\view\glut_window.hpp" />
     <ClInclude Include="..\include\view\gl_renderer.hpp" />
-    <ClInclude Include="..\src\tiny_obj_loader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\controller\engine.cpp" />
@@ -59,14 +63,18 @@
     <ClCompile Include="..\src\controller\logic.cpp" />
     <ClCompile Include="..\src\flappy_box\controller\box_object_logic.cpp" />
     <ClCompile Include="..\src\flappy_box\controller\flappy_engine.cpp" />
+    <ClCompile Include="..\src\flappy_box\controller\paddle_logic.cpp" />
     <ClCompile Include="..\src\flappy_box\model\box.cpp" />
+    <ClCompile Include="..\src\flappy_box\model\game_over.cpp" />
+    <ClCompile Include="..\src\flappy_box\model\paddle.cpp" />
+    <ClCompile Include="..\src\flappy_box\model\world.cpp" />
     <ClCompile Include="..\src\flappy_box\view\box_al_audible.cpp" />
     <ClCompile Include="..\src\flappy_box\view\box_gl_drawable.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\model\game.cpp" />
     <ClCompile Include="..\src\model\game_object.cpp" />
     <ClCompile Include="..\src\sound_provider.cpp" />
-    <ClCompile Include="..\src\tiny_obj_loader.cc" />
+    <ClCompile Include="..\src\tiny_obj_loader.cpp" />
     <ClCompile Include="..\src\view\al_renderer.cpp" />
     <ClCompile Include="..\src\view\glut_window.cpp" />
     <ClCompile Include="..\src\view\gl_renderer.cpp" />

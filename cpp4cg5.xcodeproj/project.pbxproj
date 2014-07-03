@@ -31,6 +31,9 @@
 		1ABA493D19643E22003AA52A /* paddle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493B19643E22003AA52A /* paddle.cpp */; };
 		1ABA494019643E3B003AA52A /* world.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA493E19643E3B003AA52A /* world.cpp */; };
 		1ABA494319643E65003AA52A /* game_over.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA494119643E65003AA52A /* game_over.cpp */; };
+		1ABA494A196483CF003AA52A /* paddle_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA4948196483CF003AA52A /* paddle_logic.cpp */; };
+		1ABA494D196483E0003AA52A /* world_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA494B196483E0003AA52A /* world_logic.cpp */; };
+		1ABA4950196483F2003AA52A /* game_over_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA494E196483F2003AA52A /* game_over_logic.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,6 +110,12 @@
 		1ABA493E19643E3B003AA52A /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
 		1ABA494119643E65003AA52A /* game_over.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over.cpp; sourceTree = "<group>"; };
 		1ABA49441964497E003AA52A /* -cppcube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "-cppcube.obj"; sourceTree = "<group>"; };
+		1ABA494519648390003AA52A /* paddle_logic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = paddle_logic.hpp; sourceTree = "<group>"; };
+		1ABA49461964839E003AA52A /* world_logic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = world_logic.hpp; sourceTree = "<group>"; };
+		1ABA4947196483B1003AA52A /* game_over_logic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_over_logic.hpp; sourceTree = "<group>"; };
+		1ABA4948196483CF003AA52A /* paddle_logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle_logic.cpp; sourceTree = "<group>"; };
+		1ABA494B196483E0003AA52A /* world_logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world_logic.cpp; sourceTree = "<group>"; };
+		1ABA494E196483F2003AA52A /* game_over_logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over_logic.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +195,11 @@
 		1AA2858E195B204C00069C1A /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				1AA2858F195B204C00069C1A /* box_object_logic.hpp */,
 				1AA28590195B204C00069C1A /* flappy_engine.hpp */,
+				1AA2858F195B204C00069C1A /* box_object_logic.hpp */,
+				1ABA494519648390003AA52A /* paddle_logic.hpp */,
+				1ABA49461964839E003AA52A /* world_logic.hpp */,
+				1ABA4947196483B1003AA52A /* game_over_logic.hpp */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -268,8 +280,11 @@
 		1AA285A6195B204C00069C1A /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				1AA285A7195B204C00069C1A /* box_object_logic.cpp */,
 				1AA285A8195B204C00069C1A /* flappy_engine.cpp */,
+				1AA285A7195B204C00069C1A /* box_object_logic.cpp */,
+				1ABA4948196483CF003AA52A /* paddle_logic.cpp */,
+				1ABA494B196483E0003AA52A /* world_logic.cpp */,
+				1ABA494E196483F2003AA52A /* game_over_logic.cpp */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -399,6 +414,7 @@
 				1AA285B8195B204C00069C1A /* glut_engine.cpp in Sources */,
 				1AA285B9195B204C00069C1A /* logic.cpp in Sources */,
 				1ABA494319643E65003AA52A /* game_over.cpp in Sources */,
+				1ABA494A196483CF003AA52A /* paddle_logic.cpp in Sources */,
 				1ABA493D19643E22003AA52A /* paddle.cpp in Sources */,
 				1ABA494019643E3B003AA52A /* world.cpp in Sources */,
 				1AA285BA195B204C00069C1A /* box_object_logic.cpp in Sources */,
@@ -408,7 +424,9 @@
 				1AA285BE195B204C00069C1A /* box_gl_drawable.cpp in Sources */,
 				1AA285BF195B204C00069C1A /* main.cpp in Sources */,
 				1AA285C0195B204C00069C1A /* game.cpp in Sources */,
+				1ABA494D196483E0003AA52A /* world_logic.cpp in Sources */,
 				1ABA493619642DAB003AA52A /* tiny_obj_loader.cpp in Sources */,
+				1ABA4950196483F2003AA52A /* game_over_logic.cpp in Sources */,
 				1AA285C1195B204C00069C1A /* game_object.cpp in Sources */,
 				1AA285C2195B204C00069C1A /* sound_provider.cpp in Sources */,
 				1AA285C3195B204C00069C1A /* al_renderer.cpp in Sources */,

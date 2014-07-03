@@ -1,11 +1,6 @@
 # include "../../../include/flappy_box/controller/box_object_logic.hpp"
 
-# include <thread>
-
-#define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
-# include <GL/freeglut.h>
-
-# include <AL/alut.h>
+# include <cstdlib>
 
 using namespace ::flappy_box::controller;
 
@@ -33,29 +28,35 @@ bool BoxObjectLogic::advance( ::controller::Logic& l, ::controller::InputEventHa
     
     vec3_type max = _model->maxPosition();
     
-    if(pneu(0) > max(0)) // IS THIS CORRECT ?? Betrag wählen?
-        vneu(0) = -vneu(0)*d;
-    //if(pneu(1) > max(1)) // IS THIS CORRECT ?? Betrag wählen? HIER: Y-WERT wird nicht gespiegelt
-    //    vneu(1) = -vneu(1)*d;
-    if(pneu(2) > max(2)) // IS THIS CORRECT ?? Betrag wählen?
-        vneu(2) = -vneu(2)*d;
+    if(abs(pneu(0)) > max(0)) // IS THIS CORRECT ?? Betrag wählen?
+        vneu(0) = -(vneu(0)*d);
+    if(abs(pneu(1)) > max(1)) // IS THIS CORRECT ?? Betrag wählen? HIER: Y-WERT wird nicht gespiegelt
+        vneu(1) = -(vneu(1)*d);
+    //if(abs(pneu(2)) > max(2)) // IS THIS CORRECT ?? Betrag wählen?
+    //    vneu(2) = -(vneu(2)*d);
     
     _model->setAcceleration(aneu);
     _model->setVelocity(vneu);
     _model->setPosition(pneu);
     
     // Bonus-Aufgabe, gesucht: a, v, angle
-    double abneu = _model->rotAcceleration()*d + aext(0) + flappy_box::model::Box::gravitation()(2);
+    double abneu = 1.2*(_model->rotAcceleration()*d*0.6 + aext(1) + flappy_box::model::Box::gravitation()(1));
     double vbneu = _model->rotVelocity() + abneu*dt;
-    if(fext(0) < 0) // negativ / IS THIS CORRECT ?? welcher wert, 0, 1, oder 2 ? (x,y,z)
-        vbneu = -vbneu;
-    //else // positiv
-    //    vbneu = vbneu;
     double angle = _model->angle() + vbneu*dt;
     
     _model->setAngle(angle);
     _model->setRotVelocity(vbneu);
     _model->setRotAcceleration(abneu);
+    
+    /* // test: stopping the external force, and testing decay of rotation
+    std::cout << "ANGLE: " << angle << std::endl;
+    if(abs(angle) > 28.)
+    {
+        fext(0) = 0.;fext(1) = 0.;fext(2) = 0.;
+        _model->setExternalForce(fext);
+        _model->setSize(1.);
+    }
+     */
     
     return false;
 }

@@ -16,9 +16,9 @@ namespace controller
             special_key_type special_key;
             
             enum modifier_type
-            {   SHIFT_ACTIVE = 1
-                ,  CTRL_ACTIVE = 2
-                ,   ALT_ACTIVE = 4
+            {   SHIFT_ACTIVE = 1,
+                CTRL_ACTIVE = 2,
+                ALT_ACTIVE = 4
             };
             typedef int modifier_mask_type;
             

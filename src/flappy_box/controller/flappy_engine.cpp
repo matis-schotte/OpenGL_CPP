@@ -37,7 +37,6 @@ void FlappyEngine::init( int& argc, char** argv )
     //.
     //.
     
-    
     // create one single cube (to be deleted later...)
     std::shared_ptr< flappy_box::model::Box > box = std::make_shared< flappy_box::model::Box >("Box");
     box->setSize(20.0);

@@ -28,12 +28,10 @@ void Game::processAddGameObjects()
 }
 
 // ATTENTION: NEW CODE!
-void Game::removeInvalidGameObjects(  )
+void Game::removeInvalidGameObjects()
 {
     auto predicate = []( std::shared_ptr< GameObject > const& go )->bool { return ! go->isAlive(); };
-    _objects.erase(  std::remove_if( _objects.begin(), _objects.end(), predicate ),
-                   _objects.end()
-                   );
+    _objects.erase(  std::remove_if( _objects.begin(), _objects.end(), predicate ), _objects.end() );
 }
 //
 

@@ -2,9 +2,8 @@
 
 using namespace flappy_box::model;
 
-GameOver::GameOver( const std::string& n )
+GameOver::GameOver( const int p, const std::string& n )
 : GameObject( true, n )
-,           _angle( 0.0 )
-,        _position( 0.0, 0.0, 0.0 )
+,           _playerPoints( p )
 {
 }

@@ -40,7 +40,7 @@ namespace flappy_box
             vec3_type         _velocity;
             vec3_type     _acceleration;
             vec3_type             _size;
-            vec3_type    _playerControl;
+            vec3_type    _playerControl; // beschreibt den Bewegungseinfluss durch den Nutzer
             
         }; // Paddle
         

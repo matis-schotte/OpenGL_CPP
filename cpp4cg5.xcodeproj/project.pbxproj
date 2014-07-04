@@ -34,6 +34,12 @@
 		1ABA494A196483CF003AA52A /* paddle_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA4948196483CF003AA52A /* paddle_logic.cpp */; };
 		1ABA494D196483E0003AA52A /* world_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA494B196483E0003AA52A /* world_logic.cpp */; };
 		1ABA4950196483F2003AA52A /* game_over_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA494E196483F2003AA52A /* game_over_logic.cpp */; };
+		1ABA49591964EC04003AA52A /* paddle_gl_drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA49571964EC04003AA52A /* paddle_gl_drawable.cpp */; };
+		1ABA495C1964EC1A003AA52A /* world_gl_drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA495A1964EC1A003AA52A /* world_gl_drawable.cpp */; };
+		1ABA495F1964EC2A003AA52A /* game_over_gl_drawable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA495D1964EC2A003AA52A /* game_over_gl_drawable.cpp */; };
+		1ABA49621964EC40003AA52A /* paddle_al_audible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA49601964EC40003AA52A /* paddle_al_audible.cpp */; };
+		1ABA49651964EC52003AA52A /* world_al_audible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA49631964EC52003AA52A /* world_al_audible.cpp */; };
+		1ABA49681964EC64003AA52A /* game_over_al_audible.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1ABA49661964EC64003AA52A /* game_over_al_audible.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -102,20 +108,32 @@
 		1AA285E2195B345F00069C1A /* thehead.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thehead.raw; sourceTree = "<group>"; };
 		1ABA493419642DAB003AA52A /* tiny_obj_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tiny_obj_loader.cpp; sourceTree = "<group>"; };
 		1ABA493519642DAB003AA52A /* tiny_obj_loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tiny_obj_loader.h; sourceTree = "<group>"; };
-		1ABA493719642DBA003AA52A /* cppcube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cppcube.obj; sourceTree = "<group>"; };
 		1ABA493819643DA7003AA52A /* paddle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = paddle.hpp; sourceTree = "<group>"; };
 		1ABA493919643DD6003AA52A /* world.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = world.hpp; sourceTree = "<group>"; };
 		1ABA493A19643DEE003AA52A /* game_over.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_over.hpp; sourceTree = "<group>"; };
 		1ABA493B19643E22003AA52A /* paddle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle.cpp; sourceTree = "<group>"; };
 		1ABA493E19643E3B003AA52A /* world.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world.cpp; sourceTree = "<group>"; };
 		1ABA494119643E65003AA52A /* game_over.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over.cpp; sourceTree = "<group>"; };
-		1ABA49441964497E003AA52A /* -cppcube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "-cppcube.obj"; sourceTree = "<group>"; };
 		1ABA494519648390003AA52A /* paddle_logic.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = paddle_logic.hpp; sourceTree = "<group>"; };
 		1ABA49461964839E003AA52A /* world_logic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = world_logic.hpp; sourceTree = "<group>"; };
 		1ABA4947196483B1003AA52A /* game_over_logic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_over_logic.hpp; sourceTree = "<group>"; };
 		1ABA4948196483CF003AA52A /* paddle_logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle_logic.cpp; sourceTree = "<group>"; };
 		1ABA494B196483E0003AA52A /* world_logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world_logic.cpp; sourceTree = "<group>"; };
 		1ABA494E196483F2003AA52A /* game_over_logic.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over_logic.cpp; sourceTree = "<group>"; };
+		1ABA49511964EA44003AA52A /* paddle_gl_drawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = paddle_gl_drawable.hpp; sourceTree = "<group>"; };
+		1ABA49521964EA52003AA52A /* world_gl_drawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = world_gl_drawable.hpp; sourceTree = "<group>"; };
+		1ABA49531964EA62003AA52A /* game_over_gl_drawable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_over_gl_drawable.hpp; sourceTree = "<group>"; };
+		1ABA49541964EA88003AA52A /* paddle_al_audible.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = paddle_al_audible.hpp; sourceTree = "<group>"; };
+		1ABA49551964EA99003AA52A /* world_al_audible.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = world_al_audible.hpp; sourceTree = "<group>"; };
+		1ABA49561964EAA8003AA52A /* game_over_al_audible.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_over_al_audible.hpp; sourceTree = "<group>"; };
+		1ABA49571964EC04003AA52A /* paddle_gl_drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle_gl_drawable.cpp; sourceTree = "<group>"; };
+		1ABA495A1964EC1A003AA52A /* world_gl_drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world_gl_drawable.cpp; sourceTree = "<group>"; };
+		1ABA495D1964EC2A003AA52A /* game_over_gl_drawable.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over_gl_drawable.cpp; sourceTree = "<group>"; };
+		1ABA49601964EC40003AA52A /* paddle_al_audible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = paddle_al_audible.cpp; sourceTree = "<group>"; };
+		1ABA49631964EC52003AA52A /* world_al_audible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = world_al_audible.cpp; sourceTree = "<group>"; };
+		1ABA49661964EC64003AA52A /* game_over_al_audible.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_over_al_audible.cpp; sourceTree = "<group>"; };
+		1ADB994A1966286E00AFE265 /* cessna.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cessna.obj; sourceTree = "<group>"; };
+		1ADB994B1966286E00AFE265 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,8 +155,8 @@
 		1A5F6A59195B1EC6005EF12B = {
 			isa = PBXGroup;
 			children = (
-				1ABA49441964497E003AA52A /* -cppcube.obj */,
-				1ABA493719642DBA003AA52A /* cppcube.obj */,
+				1ADB994A1966286E00AFE265 /* cessna.obj */,
+				1ADB994B1966286E00AFE265 /* cube.obj */,
 				1AA28586195B204C00069C1A /* include */,
 				1AA285A0195B204C00069C1A /* src */,
 				1AA285D6195B345E00069C1A /* res */,
@@ -218,8 +236,14 @@
 		1AA28593195B204C00069C1A /* view */ = {
 			isa = PBXGroup;
 			children = (
-				1AA28594195B204C00069C1A /* box_al_audible.hpp */,
 				1AA28595195B204C00069C1A /* box_gl_drawable.hpp */,
+				1ABA49511964EA44003AA52A /* paddle_gl_drawable.hpp */,
+				1ABA49521964EA52003AA52A /* world_gl_drawable.hpp */,
+				1ABA49531964EA62003AA52A /* game_over_gl_drawable.hpp */,
+				1AA28594195B204C00069C1A /* box_al_audible.hpp */,
+				1ABA49541964EA88003AA52A /* paddle_al_audible.hpp */,
+				1ABA49551964EA99003AA52A /* world_al_audible.hpp */,
+				1ABA49561964EAA8003AA52A /* game_over_al_audible.hpp */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -303,8 +327,14 @@
 		1AA285AB195B204C00069C1A /* view */ = {
 			isa = PBXGroup;
 			children = (
-				1AA285AC195B204C00069C1A /* box_al_audible.cpp */,
 				1AA285AD195B204C00069C1A /* box_gl_drawable.cpp */,
+				1ABA49571964EC04003AA52A /* paddle_gl_drawable.cpp */,
+				1ABA495A1964EC1A003AA52A /* world_gl_drawable.cpp */,
+				1ABA495D1964EC2A003AA52A /* game_over_gl_drawable.cpp */,
+				1AA285AC195B204C00069C1A /* box_al_audible.cpp */,
+				1ABA49601964EC40003AA52A /* paddle_al_audible.cpp */,
+				1ABA49631964EC52003AA52A /* world_al_audible.cpp */,
+				1ABA49661964EC64003AA52A /* game_over_al_audible.cpp */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -411,8 +441,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AA285B7195B204C00069C1A /* engine.cpp in Sources */,
+				1ABA495C1964EC1A003AA52A /* world_gl_drawable.cpp in Sources */,
 				1AA285B8195B204C00069C1A /* glut_engine.cpp in Sources */,
 				1AA285B9195B204C00069C1A /* logic.cpp in Sources */,
+				1ABA49651964EC52003AA52A /* world_al_audible.cpp in Sources */,
 				1ABA494319643E65003AA52A /* game_over.cpp in Sources */,
 				1ABA494A196483CF003AA52A /* paddle_logic.cpp in Sources */,
 				1ABA493D19643E22003AA52A /* paddle.cpp in Sources */,
@@ -427,11 +459,15 @@
 				1ABA494D196483E0003AA52A /* world_logic.cpp in Sources */,
 				1ABA493619642DAB003AA52A /* tiny_obj_loader.cpp in Sources */,
 				1ABA4950196483F2003AA52A /* game_over_logic.cpp in Sources */,
+				1ABA49681964EC64003AA52A /* game_over_al_audible.cpp in Sources */,
 				1AA285C1195B204C00069C1A /* game_object.cpp in Sources */,
 				1AA285C2195B204C00069C1A /* sound_provider.cpp in Sources */,
 				1AA285C3195B204C00069C1A /* al_renderer.cpp in Sources */,
 				1AA285C4195B204C00069C1A /* gl_renderer.cpp in Sources */,
+				1ABA495F1964EC2A003AA52A /* game_over_gl_drawable.cpp in Sources */,
+				1ABA49591964EC04003AA52A /* paddle_gl_drawable.cpp in Sources */,
 				1AA285C5195B204C00069C1A /* glut_window.cpp in Sources */,
+				1ABA49621964EC40003AA52A /* paddle_al_audible.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

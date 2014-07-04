@@ -1,6 +1,5 @@
 # include "../../../include/flappy_box/view/box_al_audible.hpp"
 
-# include <AL/alut.h>
 # include <thread>
 # include <functional>
 

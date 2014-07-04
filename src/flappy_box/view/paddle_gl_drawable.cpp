@@ -1,4 +1,4 @@
-# include "../../../include/flappy_box/view/box_gl_drawable.hpp"
+# include "../../../include/flappy_box/view/paddle_gl_drawable.hpp"
 
 #define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
 #include <GL/freeglut.h>
@@ -7,42 +7,34 @@
 
 using namespace ::flappy_box::view;
 
-BoxGlDrawable::BoxGlDrawable(const std::shared_ptr< ::flappy_box::model::Box >& b )
+PaddleGlDrawable::PaddleGlDrawable(const std::shared_ptr< ::flappy_box::model::Paddle >& b )
 : _model( b )
 {
-    std::string err = tinyobj::LoadObj(shapes, "cessna.obj", NULL);
+    std::string err = tinyobj::LoadObj(shapes, "cube.obj", NULL);
     
     if(!err.empty())
         std::cout << std::endl << "***ERROR: " << err << std::endl;
     else
-        for(size_t i = 0; i < shapes.size(); i++)
+        for (size_t i = 0; i < shapes.size(); i++)
             std::cout << "Loaded obj: " << shapes[i].name << std::endl;
 }
 
-BoxGlDrawable::~BoxGlDrawable()
+PaddleGlDrawable::~PaddleGlDrawable()
 {
 }
 
-void BoxGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
+void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 {
-    // TODO: Replace old rendering code with new and improved rendering - Aufgabe 5.3
-    
     glPushMatrix();
     {
-        double angle = _model->angle();
         const vec3_type& pos = _model->position();
-        const double size = _model->size();
         glTranslated( pos(0), pos(1), pos(2) );
-        glRotated( angle, 1., 1., 0. );
-        glScaled( size, size, size );
-        
-        // modell besser platzieren
-        glRotated( 90., 1., 1., 0. );
-        glScaled( .2, .2, .2 );
         
         //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
         
-        glColor3d( .4, .8, .4 );
+        glColor3d( .8, .4, .4 );
+        glScaled(1., 1., 10.);
+        glRotated(45., 0., 0., 1.);
         
         ::glBegin(GL_TRIANGLES); // GL_LINES GL_TRIANGLES
         
@@ -58,35 +50,6 @@ void BoxGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
                 }
                 ::glVertex3d(shapes[i].mesh.positions[3*shapes[i].mesh.indices[f]+0], shapes[i].mesh.positions[3*shapes[i].mesh.indices[f]+1], shapes[i].mesh.positions[3*shapes[i].mesh.indices[f]+2]);
             }
-        
-        /*
-        ::glVertex3d(-0.5, -0.5, -0.5);
-        ::glVertex3d(-0.5, -0.5,  0.5);
-        ::glVertex3d(-0.5,  0.5, -0.5);
-        ::glVertex3d(-0.5,  0.5,  0.5);
-        ::glVertex3d( 0.5, -0.5, -0.5);
-        ::glVertex3d( 0.5, -0.5,  0.5);
-        ::glVertex3d( 0.5,  0.5, -0.5);
-        ::glVertex3d( 0.5,  0.5,  0.5);
-        
-        ::glVertex3d(-0.5, -0.5, -0.5);
-        ::glVertex3d(-0.5,  0.5, -0.5);
-        ::glVertex3d( 0.5, -0.5, -0.5);
-        ::glVertex3d( 0.5,  0.5, -0.5);
-        ::glVertex3d(-0.5, -0.5,  0.5);
-        ::glVertex3d(-0.5,  0.5,  0.5);
-        ::glVertex3d( 0.5, -0.5,  0.5);
-        ::glVertex3d( 0.5,  0.5,  0.5);
-        
-        ::glVertex3d(-0.5, -0.5, -0.5);
-        ::glVertex3d( 0.5, -0.5, -0.5);
-        ::glVertex3d(-0.5, -0.5,  0.5);
-        ::glVertex3d( 0.5, -0.5,  0.5);
-        ::glVertex3d(-0.5,  0.5, -0.5);
-        ::glVertex3d( 0.5,  0.5, -0.5);
-        ::glVertex3d(-0.5,  0.5,  0.5);
-        ::glVertex3d( 0.5,  0.5,  0.5);
-         */
         
         ::glEnd();
         

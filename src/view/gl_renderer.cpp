@@ -28,13 +28,26 @@ GlRenderer::delegate_factory_type const& GlRenderer::drawable_factory() const
 void GlRenderer::visualize_model( GlutWindow& w )
 {
 #ifndef DEBUG_VISUALIZATION
-    glClearColor( 1.0f, 1.0f, 1.0f, 1.0f );
+    glClearColor( 0.f, 0.f, 0.f, 1.0f ); 
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 #endif
     
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     gluLookAt( 0,-200,0, 0,0,0, 0,0,1 );
+    
+    
+    // Enable global LIGHTNING
+    ::glEnable(GL_CULL_FACE);
+    ::glEnable(GL_NORMALIZE);
+    ::glEnable(GL_LIGHTING);
+    ::glEnable(GL_LIGHT0);
+    ::glEnable(GL_COLOR_MATERIAL);
+    ::glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+    
+    //::glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0.9);
+    GLfloat lPos[] = {40.0, -100.0, 50.0, .5};
+    ::glLightfv(GL_LIGHT0, GL_POSITION, lPos);
     
     
     // render routines for game objects

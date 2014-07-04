@@ -27,9 +27,13 @@ namespace flappy_box
             void restartGame( ::controller::Logic& l );
             
             std::shared_ptr< model::World > _model;
+            std::shared_ptr< flappy_box::model::Paddle > paddle;
+            
             bool _shallRestartTheGame;
+            
             std::random_device rd;
-            std::uniform_int_distribution<int> xKoord,boxSize;
+            std::uniform_int_distribution<int> xKoord,boxSize,newBoxTime;
+            double ticks, newBoxWhen;
         };
         
     }

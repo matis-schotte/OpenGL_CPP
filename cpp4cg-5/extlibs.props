@@ -8,7 +8,9 @@
     <freeALUT_LibDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\OpenAL\lib\</freeALUT_LibDir>
     <freeGLUT_IncludeDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\Freeglut\include\</freeGLUT_IncludeDir>
     <freeGLUT_LibDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\Freeglut\lib\</freeGLUT_LibDir>
-    <eigen_IncludeDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\eigen3\</eigen_IncludeDir>
+    <glew_IncludeDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\glew\include\</glew_IncludeDir>
+    <glew_LibDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\glew\lib\Release\Win32</glew_LibDir>
+    <eigen_IncludeDir>C:\Users\Franz Nieschalk\Documents\Visual Studio 2013\Projects\CPP4CG\ex4_code\</eigen_IncludeDir>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup />
@@ -30,6 +32,12 @@
     </BuildMacro>
     <BuildMacro Include="freeGLUT_LibDir">
       <Value>$(freeGLUT_LibDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="glew_IncludeDir">
+      <Value>$(glew_IncludeDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="glew_LibDir">
+      <Value>$(glew_LibDir)</Value>
     </BuildMacro>
     <BuildMacro Include="eigen_IncludeDir">
       <Value>$(eigen_IncludeDir)</Value>

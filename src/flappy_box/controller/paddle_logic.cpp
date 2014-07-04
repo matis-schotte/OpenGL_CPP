@@ -32,18 +32,18 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     //_model->size();
     vec3_type max = _model->maxPosition();
     
-    if(abs(pneu(0)) > max(0)) // IS THIS CORRECT ?? Betrag wählen?
-        vneu(0) = -vneu(0);
+    // check and set max or min position
+    vec3_type pmax = _model->maxPosition();
+    if (pneu(0) > pmax(0)) pneu(0) = pmax(0);
+    else if (pneu(0) < -pmax(0)) pneu(0) = -pmax(0);
+    if (pneu(1) > pmax(1)) pneu(1) = pmax(1);
+    else if (pneu(1) < -pmax(1)) pneu(1) = -pmax(1);
+    if (pneu(2) > pmax(2)) pneu(2) = pmax(2);
+    else if (pneu(2) < -pmax(2)) pneu(2) = -pmax(2);
     
-    /* Änderungen von Franz: PRÜFEN was besser funzt
-     // check and set max or min position
-     	vec3_type pmax = _model->maxPosition();
-     	if (pneu(0) > pmax(0)) pneu(0) = pmax(0);
-     	else if (pneu(0) < -pmax(0)) pneu(0) = -pmax(0);
-     	if (pneu(1) > pmax(1)) pneu(1) = pmax(1);
-     	else if (pneu(1) < -pmax(1)) pneu(1) = -pmax(1);
-     	if (pneu(2) > pmax(2)) pneu(2) = pmax(2);
-     	else if (pneu(2) < -pmax(2)) pneu(2) = -pmax(2);
+    /* Änderungen: PRÜFEN was besser funzt
+     if(abs(pneu(0)) > max(0)) // IS THIS CORRECT ?? Betrag wählen?
+     vneu(0) = -vneu(0);
      */
     
     _model->setAcceleration(aneu);

@@ -74,7 +74,7 @@ bool WorldLogic::advance( ::controller::Logic& l, ::controller::InputEventHandle
         std::shared_ptr< flappy_box::model::Box > box = std::dynamic_pointer_cast< flappy_box::model::Box >(go);
         if(box && box->isAlive())
         {
-            if(box->position()(2) < paddle->position()(2))
+            if(box->position()(2) <= paddle->position()(2))
             {
                 box->setAlive(false);
                 _model->setRemainingLives(_model->remainingLives()-1);

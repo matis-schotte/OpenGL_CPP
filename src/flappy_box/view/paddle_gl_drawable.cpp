@@ -14,9 +14,9 @@ PaddleGlDrawable::PaddleGlDrawable(const std::shared_ptr< ::flappy_box::model::P
     
     if(!err.empty())
         std::cout << std::endl << "***ERROR: " << err << std::endl;
-    else
-        for (size_t i = 0; i < shapes.size(); i++)
-            std::cout << "Loaded obj: " << shapes[i].name << std::endl;
+    //else
+    //    for (size_t i = 0; i < shapes.size(); i++)
+    //        std::cout << "Loaded obj: " << shapes[i].name << std::endl;
 }
 
 PaddleGlDrawable::~PaddleGlDrawable()

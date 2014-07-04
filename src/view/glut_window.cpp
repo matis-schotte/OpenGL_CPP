@@ -50,7 +50,7 @@ void GlutWindow::invalidate()
 {
     if( is_closed() )
     {
-        std::clog << "view::GlutWindow::ensureCurrent: Window was already closed." << std::endl;
+        std::clog << "view::GlutWindow::invalidate: Window was already closed." << std::endl;
         return;
     }
     ensureCurrent();
@@ -105,7 +105,7 @@ void GlutWindow::close()
 {
     if( is_closed() )
     {
-        std::clog << "view::GlutWindow::close: Window was already closed." << std::endl;
+        //std::clog << "view::GlutWindow::close: Window was already closed." << std::endl;
         return;
     }
     glutDestroyWindow( _glut_win_id );

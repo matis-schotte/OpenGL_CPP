@@ -28,7 +28,7 @@ void check_state_thread ( ALuint source, ALint state ) // <-- vorgeben?
         {
             // free source
             alDeleteSources( 1, &source );
-            std::clog << alutGetErrorString(alutGetError()) << " - DELETED SOURCE" <<std::endl;;
+            //std::clog << alutGetErrorString(alutGetError()) << " - DELETED SOURCE" <<std::endl;;
             return;
         }
     }
@@ -88,7 +88,7 @@ void SoundProvider::getAlBuffer(const char * filename, ALuint * buffer)
         newBuffer = alutCreateBufferFromFile( (path + filename).c_str() );
         if ( newBuffer )
         {
-            std::cout << "Successfully loaded " << path << filename << std::endl;
+            //std::cout << "Successfully loaded " << path << filename << std::endl;
             _buffers.insert( std::pair< const char *, ALuint>(filename, newBuffer ) );
             *buffer = newBuffer;
         }

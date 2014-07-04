@@ -10,6 +10,7 @@ using namespace ::flappy_box::view;
 GameOverGlDrawable::GameOverGlDrawable(const std::shared_ptr< ::flappy_box::model::GameOver >& b )
 : _model( b )
 {
+    std::cout << "Game Over - Score: " << _model->playerPoints() << std::endl;
 }
 
 GameOverGlDrawable::~GameOverGlDrawable()

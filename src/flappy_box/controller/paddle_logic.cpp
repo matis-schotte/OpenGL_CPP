@@ -16,7 +16,7 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     
     if(ev.key_state == ev.KEY_UP) _model->setPlayerControl(vec3_type(0., 0., 0.));
     else if(ev.key_state == ev.KEY_DOWN && ev.special_key == GLUT_KEY_LEFT) _model->setPlayerControl(vec3_type(-1., 0., 0.));
-    else if(ev.key_state == ev.KEY_DOWN && ev.special_key == GLUT_KEY_LEFT) _model->setPlayerControl(vec3_type(1., 0., 0.));
+    else if(ev.key_state == ev.KEY_DOWN && ev.special_key == GLUT_KEY_RIGHT) _model->setPlayerControl(vec3_type(1., 0., 0.));
     
     vec3_type palt = _model->position();
     vec3_type valt = _model->velocity();

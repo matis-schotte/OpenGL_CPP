@@ -7,7 +7,6 @@ namespace flappy_box
 {
     namespace controller
     {
-        
         class GameOverLogic : public ::controller::Logic::ObjectLogic
         {
         public:
@@ -19,7 +18,6 @@ namespace flappy_box
         private:
             std::shared_ptr< model::GameOver > _model;
         };
-        
     }
     
 } // audiophile

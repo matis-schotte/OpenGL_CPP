@@ -7,7 +7,6 @@ namespace flappy_box
 {
     namespace controller
     {
-        
         class BoxObjectLogic : public ::controller::Logic::ObjectLogic
         {
         public:
@@ -19,7 +18,6 @@ namespace flappy_box
         private:
             std::shared_ptr< model::Box > _model;
         };
-        
     }
     
 } // audiophile

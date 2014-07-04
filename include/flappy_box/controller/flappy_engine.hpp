@@ -11,7 +11,6 @@ namespace flappy_box
 {
     namespace controller
     {
-        
         class FlappyEngine : public ::controller::GlutEngine
         {
         public:
@@ -34,6 +33,5 @@ namespace flappy_box
             std::shared_ptr< ::view::GlRenderer > _gl_renderer;
             
         }; // FlappyEngine
-        
     } // controller::
 } // flappy_box::

@@ -14,22 +14,9 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
 {
     // key, special_key, modifier_mask, key_state, mouse_pos
     
-    switch(ev.special_key)
-    {
-        case GLUT_KEY_LEFT:
-            if(ev.key_state == ev.KEY_DOWN)
-                _model->setPlayerControl(vec3_type(-1., 0., 0.));
-            else if(ev.key_state == ev.KEY_UP)
-                _model->setPlayerControl(vec3_type(0., 0., 0.));
-            break;
-        
-        case GLUT_KEY_RIGHT:
-            if(ev.key_state == ev.KEY_DOWN)
-                _model->setPlayerControl(vec3_type(1., 0., 0.));
-            else if(ev.key_state == ev.KEY_UP)
-                _model->setPlayerControl(vec3_type(0., 0., 0.));
-            break;
-    }
+    if(ev.key_state == ev.KEY_UP) _model->setPlayerControl(vec3_type(0., 0., 0.));
+    else if(ev.key_state == ev.KEY_DOWN && ev.special_key == GLUT_KEY_LEFT) _model->setPlayerControl(vec3_type(-1., 0., 0.));
+    else if(ev.key_state == ev.KEY_DOWN && ev.special_key == GLUT_KEY_LEFT) _model->setPlayerControl(vec3_type(1., 0., 0.));
     
     vec3_type palt = _model->position();
     vec3_type valt = _model->velocity();
@@ -47,6 +34,17 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     
     if(abs(pneu(0)) > max(0)) // IS THIS CORRECT ?? Betrag wählen?
         vneu(0) = -vneu(0);
+    
+    /* Änderungen von Franz: PRÜFEN was besser funzt
+     // check and set max or min position
+     	vec3_type pmax = _model->maxPosition();
+     	if (pneu(0) > pmax(0)) pneu(0) = pmax(0);
+     	else if (pneu(0) < -pmax(0)) pneu(0) = -pmax(0);
+     	if (pneu(1) > pmax(1)) pneu(1) = pmax(1);
+     	else if (pneu(1) < -pmax(1)) pneu(1) = -pmax(1);
+     	if (pneu(2) > pmax(2)) pneu(2) = pmax(2);
+     	else if (pneu(2) < -pmax(2)) pneu(2) = -pmax(2);
+     */
     
     _model->setAcceleration(aneu);
     _model->setVelocity(vneu);

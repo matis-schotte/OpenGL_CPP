@@ -11,7 +11,6 @@ namespace flappy_box
 {
     namespace controller
     {
-        
         class WorldLogic : public ::controller::Logic::ObjectLogic
         {
         public:
@@ -35,7 +34,6 @@ namespace flappy_box
             std::uniform_int_distribution<int> xKoord,boxSize,newBoxTime;
             double ticks, newBoxWhen;
         };
-        
     }
     
 } // audiophile

@@ -2,9 +2,9 @@
 
 using namespace ::flappy_box::controller;
 
-GameOverLogic::GameOverLogic(const std::shared_ptr< flappy_box::model::GameOver >& b )
+GameOverLogic::GameOverLogic(const std::shared_ptr< flappy_box::model::GameOver >& go )
 : ::controller::Logic::ObjectLogic()
-, _model( b )
+, _model( go )
 {}
 
 bool GameOverLogic::advance( ::controller::Logic& l, ::controller::InputEventHandler::keyboard_event const& ev )

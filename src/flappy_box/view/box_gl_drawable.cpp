@@ -28,16 +28,11 @@ using namespace ::flappy_box::view;
 #define TEXCOORD_DR 1,1
 #define TEXCOORD_DL 1,0
 
-BoxGlDrawable::BoxGlDrawable(const std::shared_ptr< ::flappy_box::model::Box >& b )
-: _model( b )
+BoxGlDrawable::BoxGlDrawable(const std::shared_ptr< ::flappy_box::model::Box >& b ) : _model( b )
 {
-	for (int i = 0; i < 128; i++) {
-		for (int j = 0; j < 128; j++) {
-			pixels[i][j][0] = 1.0f;
-			pixels[i][j][1] = 0.0f;
-			pixels[i][j][2] = 0.0f;
-		}
-	}
+	FILE *rawFile = fopen("thehead.raw", "rb");
+	fread(pixels, sizeof(pixels[0]), sizeof(pixels) / sizeof(pixels[0]), rawFile);
+	fclose(rawFile);
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -47,7 +42,7 @@ BoxGlDrawable::BoxGlDrawable(const std::shared_ptr< ::flappy_box::model::Box >& 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_FLOAT, pixels);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 128, 128, 0, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 }
 
 BoxGlDrawable::~BoxGlDrawable()
@@ -94,34 +89,35 @@ void BoxGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 			TEXCOORD_UL, TEXCOORD_UR, TEXCOORD_DR, TEXCOORD_DL
 		};
 
-		// enable and point arrays
+		// enable and point to arrays
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_NORMAL_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glEnable(GL_TEXTURE_2D);
 
 		glVertexPointer(3, GL_FLOAT, 0, vertices);
 		glNormalPointer(GL_FLOAT, 0, normals);
 		glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
 
 		// draw planes
+		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
+		glColor3d(0.4, 0.8, 0.4);
 		glDrawArrays(GL_QUADS, 0, 24);
 		glDisable(GL_TEXTURE_2D);
 
-		// switch mode for lines
+		// switch mode, line width and color for line drawing
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glLineWidth(2.0f);
-
-		// draw lines
 		glColor3d(0.2, 1.0, 0.2);
 		glDrawArrays(GL_QUADS, 0, 24);
 
 		// switch everything back to default
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glLineWidth(1.0f);
+
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     }
     glPopMatrix();
 }

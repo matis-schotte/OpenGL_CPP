@@ -21,7 +21,12 @@ namespace flappy_box
         private:
             std::shared_ptr< model::Box const > _model;
             std::vector<tinyobj::shape_t> shapes;
-			GLfloat pixels[128][128][3];
+
+			GLfloat vertices[72];
+			GLfloat *normals;
+			GLfloat *texCoords;
+
+			GLubyte pixels[128][128][3];
 			GLuint texture;
         }; // BoxGlDrawable
     }

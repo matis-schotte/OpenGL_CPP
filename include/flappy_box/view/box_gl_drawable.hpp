@@ -4,6 +4,7 @@
 # include "../../flappy_box/model/box.hpp"
 
 #include "../../tiny_obj_loader.h"
+#include <GL/freeglut.h>
 
 namespace flappy_box
 {
@@ -20,7 +21,8 @@ namespace flappy_box
         private:
             std::shared_ptr< model::Box const > _model;
             std::vector<tinyobj::shape_t> shapes;
-            
+			GLfloat pixels[128][128][3];
+			GLuint texture;
         }; // BoxGlDrawable
     }
 }

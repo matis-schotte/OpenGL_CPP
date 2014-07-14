@@ -26,8 +26,10 @@ namespace flappy_box
 			double r1 = 0;
 			const unsigned int u0 = 40;
 			const unsigned int u1 = 15;
+			const unsigned int blade_count = 9;
 
-			GLuint glBuffers[3];
+			GLuint torus_buffers[3];
+			GLuint rotor_buffers[3];
             
         }; // BoxGlDrawable
     }

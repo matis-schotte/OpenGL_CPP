@@ -27,9 +27,9 @@ PaddleGlDrawable::~PaddleGlDrawable()
 
 void PaddleGlDrawable::updateVBOs() {
 	// torus
-	double torus_vertices[3*40*15];
-	double torus_normals[3*40*15];
-	unsigned int torus_indices[2*3*40*15];
+	double torus_vertices[3*40*15] = {0};
+	double torus_normals[3*40*15] = {0};
+	unsigned int torus_indices[2*3*40*15] = {0};
 
 	for (unsigned int i = 0; i < u0; i++) {
 		for (unsigned int j = 0; j < u1; j++) {
@@ -52,7 +52,7 @@ void PaddleGlDrawable::updateVBOs() {
 		}
 	}
 
-	std::fill<unsigned int[], unsigned int>(torus_indices, std::end(torus_indices), 0u);
+	//std::fill<unsigned int[], unsigned int>(torus_indices, std::end(torus_indices), 0u);
 	
 	// indices
 	for (unsigned int i = 0; i < u0; i++) {
@@ -106,9 +106,9 @@ void PaddleGlDrawable::updateVBOs() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof(unsigned int)*3600, torus_indices, GL_STATIC_DRAW);
 
 	// rotor
-	double rotor_vertices[3*3*9];
-	double rotor_normals[3*3*9];
-	unsigned int rotor_indices[2*3*9];
+	double rotor_vertices[3*3*9] = {0};
+	double rotor_normals[3*3*9] = {0};
+	unsigned int rotor_indices[2*3*9] = {0};
 
 	for (unsigned int i = 0; i < blade_count; i ++) {
 		const double a1 = 2 * M_PI * ((static_cast<double>(i) + 0.3) / static_cast<double>(blade_count));
@@ -148,7 +148,7 @@ void PaddleGlDrawable::updateVBOs() {
 		rotor_normals[i*blade_count + 8] = n(2);
 	}
 	
-	std::fill<unsigned int[], unsigned int>(rotor_indices, std::end(rotor_indices), 0u);
+	//std::fill<unsigned int[], unsigned int>(rotor_indices, std::end(rotor_indices), 0u);
 
 	for (unsigned int i = 0; i < 3*9; i++) {
 		rotor_indices[i] = i; 

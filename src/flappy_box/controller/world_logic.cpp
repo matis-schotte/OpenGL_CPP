@@ -12,7 +12,7 @@ WorldLogic::WorldLogic( const std::shared_ptr< flappy_box::model::World >& b, co
 , _model( b )
 , _shallRestartTheGame( r )
 {
-    xKoord = std::uniform_int_distribution<int>(static_cast<int>(-_model->getWorldHalfWidth(), _model->getWorldHalfWidth()));
+    xKoord = std::uniform_int_distribution<int>(static_cast<int>(-_model->getWorldHalfWidth()), static_cast<int>(_model->getWorldHalfWidth()));
     boxSize = std::uniform_int_distribution<int>(3, 10); // random box size
     newBoxTime = std::uniform_int_distribution<int>(2, 4); // random box size
     

@@ -1,7 +1,5 @@
 # include "../../../include/flappy_box/view/box_gl_drawable.hpp"
 
-#define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
-
 using namespace ::flappy_box::view;
 
 std::vector<tinyobj::shape_t> BoxGlDrawable::shapes;

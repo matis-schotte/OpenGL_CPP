@@ -4,6 +4,8 @@
 # include "../../flappy_box/model/box.hpp"
 
 #include "../../tiny_obj_loader.h"
+
+#define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
 #include <GL/freeglut.h>
 
 namespace flappy_box

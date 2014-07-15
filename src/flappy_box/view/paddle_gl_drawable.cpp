@@ -130,10 +130,10 @@ void PaddleGlDrawable::updateVBOs() {
 		rotor_vertices[i*blade_count + 7] = v2(1);
 		rotor_vertices[i*blade_count + 8] = v2(2);
 
-		vec3_type n = (v2 - v0).cross(v1 - v0);
-		n(0) = abs(n(0));
-		n(1) = abs(n(1));
-		n(2) = abs(n(2));
+		vec3_type n = (v0 - v2).cross(v0 - v1);
+		//n(0) = abs(n(0)); // WARUM ABSOLUT? damit werden ja die vorzeichen gelšscht ! ;)
+		//n(1) = abs(n(1));
+		//n(2) = abs(n(2));
 
 		rotor_normals[i*blade_count + 0] = n(0);
 		rotor_normals[i*blade_count + 1] = n(1);
@@ -172,27 +172,44 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
     glPushMatrix();
     {
         const vec3_type& pos = _model->position();
+        const vec3_type& size = _model->size();
         glTranslated(pos(0), pos(1), pos(2));
-
-		// lighting
+        
+        // Enable LIGHTING
+        glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 		glEnable(GL_COLOR_MATERIAL);
 		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 		GLfloat lPos[4] = { 
-			static_cast<float>(pos(0)), 
-			static_cast<float>(pos(1) - (r0*1.5)), 
-			static_cast<float>(pos(2) + (r1*3.0)), 
+			static_cast<float>(pos(0) - size(0)/2.),
+			static_cast<float>(pos(1) - (r0*1.5) - 10.),
+			static_cast<float>(pos(2) + (r1*3.0) + 100.),
 			1.0f 
 		};
 		glLightfv(GL_LIGHT0, GL_POSITION, lPos);
-		
-		glEnableClientState(GL_VERTEX_ARRAY); 
-		glEnableClientState(GL_NORMAL_ARRAY); 
-		
+        
+        glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_NORMAL_ARRAY);
+        
+        // draw rotor
+		glColor3f(.4f, .8f, .4f);
+		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
+        
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
+		glNormalPointer(GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
+		glDrawElements(GL_TRIANGLES, 2*3*9, GL_UNSIGNED_INT, NULL);
+        
+		glBindBuffer(GL_ARRAY_BUFFER, NULL);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
+        
 		// draw torus
-		glColor3f(.6f, .9f, .9f);
+        glColor3f(.6f, .9f, .9f);
 		glRotated(0.0, 0.0, 0.0, 0.0);
-
+        //glScaled(1.8, 1.8, 1.8);
+        
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[0]);
 		glVertexPointer(3, GL_DOUBLE, 0, NULL);
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[1]);
@@ -200,21 +217,11 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, torus_buffers[2]);
 		glDrawElements(GL_TRIANGLES, u0*u1*6, GL_UNSIGNED_INT, NULL);
 
-		// draw rotor
-		glColor3f(.4f, .8f, .4f);
-		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
-		glVertexPointer(3, GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
-		glNormalPointer(GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
-		glDrawElements(GL_TRIANGLES, 2*3*9, GL_UNSIGNED_INT, NULL);
-
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
+        
 		glDisableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
     }
     glPopMatrix();
 }

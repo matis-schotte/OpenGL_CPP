@@ -27,19 +27,17 @@ GlRenderer::delegate_factory_type const& GlRenderer::drawable_factory() const
 
 void GlRenderer::visualize_model( GlutWindow& w )
 {
-#ifndef DEBUG_VISUALIZATION
     glClearColor( 0.f, 0.f, 0.f, 1.0f ); 
     glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-#endif
     
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     gluLookAt( 0,-200,50, 0,0,0, 0,0,1 );
     
-    // Enable global LIGHTING
+    // Enable standard stuff
     glEnable(GL_CULL_FACE);
     glEnable(GL_NORMALIZE);
-    glEnable(GL_LIGHTING);
+    glEnable(GL_DEPTH_TEST);
     
     // render routines for game objects
     for( auto o : game_model()->objects() )

@@ -7,13 +7,18 @@
 
 using namespace ::flappy_box::view;
 
+std::vector<tinyobj::shape_t> BoxGlDrawable::shapes;
+
 BoxGlDrawable::BoxGlDrawable(const std::shared_ptr< ::flappy_box::model::Box >& b )
 : _model( b )
 {
-    std::string err = tinyobj::LoadObj(shapes, "cessna.obj", NULL);
-    
-    if(!err.empty())
-        std::cout << std::endl << "***ERROR: " << err << std::endl;
+    if(shapes.empty())
+    {
+        std::string err = tinyobj::LoadObj(shapes, "cessna.obj", NULL);
+        
+        if(!err.empty())
+            std::cout << std::endl << "***ERROR: " << err << std::endl;
+    }
     //else
     //    for(size_t i = 0; i < shapes.size(); i++)
     //        std::cout << "Loaded obj: " << shapes[i].name << std::endl;

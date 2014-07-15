@@ -19,7 +19,7 @@ namespace flappy_box
             
         private:
             std::shared_ptr< model::Box const > _model;
-            std::vector<tinyobj::shape_t> shapes;
+            static std::vector<tinyobj::shape_t> shapes;
             
         }; // BoxGlDrawable
     }

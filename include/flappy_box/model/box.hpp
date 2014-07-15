@@ -43,8 +43,8 @@ namespace flappy_box
             void setRotVelocity( double rv ) { _rotVelocity = rv; }
             
             static const vec3_type& gravitation() { static const vec3_type g(0.0, 0.0, -1.5); return g; };
-            
-            constexpr static const double decay = 0.8;
+			// MSVC compiler did not accept 'constexpr static const double decay = 0.8;'
+			static const double decay() { static const double decay = 0.8; return decay; };			
             
         private:
             

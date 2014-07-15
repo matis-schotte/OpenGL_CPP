@@ -1,5 +1,7 @@
 # pragma once
 
+#include "GL\glew.h"
+
 # include "../model/game.hpp"
 
 # include "../factory_map.hpp"

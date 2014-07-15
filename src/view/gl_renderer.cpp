@@ -34,21 +34,12 @@ void GlRenderer::visualize_model( GlutWindow& w )
     
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
-    gluLookAt( 0,-200,0, 0,0,0, 0,0,1 );
+    gluLookAt( 0,-200,50, 0,0,0, 0,0,1 );
     
-    
-    // Enable global LIGHTNING
-    ::glEnable(GL_CULL_FACE);
-    ::glEnable(GL_NORMALIZE);
-    ::glEnable(GL_LIGHTING);
-    ::glEnable(GL_LIGHT0);
-    ::glEnable(GL_COLOR_MATERIAL);
-    ::glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-    
-    //::glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0.9);
-    GLfloat lPos[] = {40.0, -100.0, 50.0, .5};
-    ::glLightfv(GL_LIGHT0, GL_POSITION, lPos);
-    
+    // Enable global LIGHTING
+    glEnable(GL_CULL_FACE);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_LIGHTING);
     
     // render routines for game objects
     for( auto o : game_model()->objects() )

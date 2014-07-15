@@ -16,10 +16,20 @@ namespace flappy_box
             PaddleGlDrawable( const std::shared_ptr< model::Paddle >& );
             virtual ~PaddleGlDrawable();
             virtual void visualize( ::view::GlRenderer&, ::view::GlutWindow& ) override;
+			virtual void updateVBOs();
             
         private:
             std::shared_ptr< model::Paddle const > _model;
             std::vector<tinyobj::shape_t> shapes;
+
+			double r0 = 0;
+			double r1 = 0;
+			const unsigned int u0 = 40;
+			const unsigned int u1 = 15;
+			const unsigned int blade_count = 9;
+
+			GLuint torus_buffers[3];
+			GLuint rotor_buffers[3];
             
         }; // BoxGlDrawable
     }

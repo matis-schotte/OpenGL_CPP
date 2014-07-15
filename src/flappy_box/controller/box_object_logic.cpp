@@ -18,7 +18,7 @@ bool BoxObjectLogic::advance( ::controller::Logic& l, ::controller::InputEventHa
     vec3_type aalt = _model->acceleration();
     const vec3_type agrav = flappy_box::model::Box::gravitation();
     vec3_type fext = _model->externalForce();
-    const double d = flappy_box::model::Box::decay;
+    const double d = flappy_box::model::Box::decay();
     const double dt = l.game_model()->timestep().count();
     const double m = _model->size()*_model->size()*_model->size(); // use volume of the cube
     vec3_type aext = fext / m; // umgestellt: fext = m * aext;
@@ -32,22 +32,29 @@ bool BoxObjectLogic::advance( ::controller::Logic& l, ::controller::InputEventHa
 
     //TODO Begrenzung auf Minimalwerte -> min = max * -1 ?
     // Anmerkung an Franz: die abs() müssen schon da bleiben, denn pneu kann +/- sein
+	// An Matis: Die "TODO" Markierung war da, weil keine Fallunterscheidungen für den "negativen Rand" behandelt wurden
     
 	if(abs(pneu(0)) > max(0))
     {
-		// pneu(0) = max(0); // auf Maximalwert begrenzen // -->> x: an rechter oder linker rand gestossen? entweder max oder -max
+		// keine elegante Lösung, aber müsste passen
+		if (pneu(0) >= 0) pneu(0) = max(0);
+		else pneu(0) = -max(0);
 		vneu(0) = -vneu(0)*d; // unelastischer Stoss
 	}
     
 	if(abs(pneu(1)) > max(1))
     {
-		pneu(1) = -max(1); // auf Maximalwert begrenzen // da ein würfel immer aus dem bildschirm kommt (-y) kann mit -max begrenzt werden
+		// keine elegante Lösung, aber müsste passen
+		if (pneu(1) >= 0) pneu(1) = max(1);
+		else pneu(1) = -max(1);
 		// HIER: Y-WERT wird nicht gespiegelt
 	}
     
-	if(pneu(2) > max(2))
+	if(abs(pneu(2)) > max(2))
     {
-		pneu(2) = max(2); // auf Maximalwert begrenzen
+		// keine elegante Lösung, aber müsste passen
+		if (pneu(2) >= 0) pneu(2) = max(2);
+		else pneu(2) = -max(2);
 		vneu(2) = -vneu(2)*d; // unelastischer Stoss
     }
     /*

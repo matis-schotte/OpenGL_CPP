@@ -4,6 +4,7 @@
 # include "../../flappy_box/model/box.hpp"
 
 #include "../../tiny_obj_loader.h"
+#include <GL/freeglut.h>
 
 namespace flappy_box
 {

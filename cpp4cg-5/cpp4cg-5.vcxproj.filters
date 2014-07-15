@@ -168,6 +168,30 @@
     <ClInclude Include="..\include\flappy_box\controller\paddle_logic.hpp">
       <Filter>Header Files\flappy_box\controller</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\flappy_box\controller\game_over_logic.hpp">
+      <Filter>Header Files\flappy_box\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\controller\world_logic.hpp">
+      <Filter>Header Files\flappy_box\controller</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\view\game_over_al_audible.hpp">
+      <Filter>Header Files\flappy_box\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\view\game_over_gl_drawable.hpp">
+      <Filter>Header Files\flappy_box\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\view\paddle_al_audible.hpp">
+      <Filter>Header Files\flappy_box\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\view\paddle_gl_drawable.hpp">
+      <Filter>Header Files\flappy_box\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\view\world_al_audible.hpp">
+      <Filter>Header Files\flappy_box\view</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\flappy_box\view\world_gl_drawable.hpp">
+      <Filter>Header Files\flappy_box\view</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\model\game.cpp">
@@ -229,6 +253,30 @@
     </ClCompile>
     <ClCompile Include="..\src\flappy_box\controller\paddle_logic.cpp">
       <Filter>Source Files\flappy_box\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\controller\game_over_logic.cpp">
+      <Filter>Source Files\flappy_box\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\controller\world_logic.cpp">
+      <Filter>Source Files\flappy_box\controller</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\view\game_over_al_audible.cpp">
+      <Filter>Source Files\flappy_box\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\view\game_over_gl_drawable.cpp">
+      <Filter>Source Files\flappy_box\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\view\paddle_al_audible.cpp">
+      <Filter>Source Files\flappy_box\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\view\paddle_gl_drawable.cpp">
+      <Filter>Source Files\flappy_box\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\view\world_al_audible.cpp">
+      <Filter>Source Files\flappy_box\view</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\flappy_box\view\world_gl_drawable.cpp">
+      <Filter>Source Files\flappy_box\view</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

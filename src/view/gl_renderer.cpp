@@ -34,7 +34,7 @@ void GlRenderer::visualize_model( GlutWindow& w )
     
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
-    gluLookAt( 0,-200,0, 0,0,0, 0,0,1 );
+    gluLookAt( 0,-200,50, 0,0,0, 0,0,1 );
     
     // Enable global LIGHTING
     glEnable(GL_CULL_FACE);

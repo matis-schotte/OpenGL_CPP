@@ -40,15 +40,16 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     else if (pneu(1) < -pmax(1)) pneu(1) = -pmax(1);
     if (pneu(2) > pmax(2)) pneu(2) = pmax(2);
     else if (pneu(2) < -pmax(2)) pneu(2) = -pmax(2);
-    
-    /* Änderungen: PRÜFEN was besser funzt
-     if(abs(pneu(0)) > max(0)) // IS THIS CORRECT ?? Betrag wählen?
-     vneu(0) = -vneu(0);
-     */
-    
+
     _model->setAcceleration(aneu);
     _model->setVelocity(vneu);
     _model->setPosition(pneu);
     
+	double t = l.game_model()->timestep().count();
+	double bladesAngle = _model->bladesAngle();
+	bladesAngle += 720 * t;
+	bladesAngle = bladesAngle - ((static_cast<int>(bladesAngle) / 360) * 360); // avoid overflow
+	_model->setBladesAngle(bladesAngle);
+
     return false;
 }

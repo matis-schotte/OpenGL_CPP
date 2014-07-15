@@ -108,11 +108,11 @@ void PaddleGlDrawable::updateVBOs() {
 	// rotor
 	double rotor_vertices[3*3*9];
 	double rotor_normals[3*3*9];
-	unsigned int rotor_indices[3*9];
+	unsigned int rotor_indices[2*3*9];
 
 	for (unsigned int i = 0; i < blade_count; i ++) {
-		const double a1 = ((static_cast<double>(i) + 0.3) / static_cast<double>(blade_count));
-		const double a2 = ((static_cast<double>(i) - 0.3) / static_cast<double>(blade_count));
+		const double a1 = 2 * M_PI * ((static_cast<double>(i) + 0.3) / static_cast<double>(blade_count));
+		const double a2 = 2 * M_PI * ((static_cast<double>(i) - 0.3) / static_cast<double>(blade_count));
 
 		vec3_type v0 = vec3_type(0, 0, 0);
 		vec3_type v1 = vec3_type((r0 - r1) * cos(a1), (r0 - r1) * sin(a1), +r1);
@@ -151,7 +151,8 @@ void PaddleGlDrawable::updateVBOs() {
 	std::fill<unsigned int[], unsigned int>(rotor_indices, std::end(rotor_indices), 0u);
 
 	for (unsigned int i = 0; i < 3*9; i++) {
-		rotor_indices[i] = 3*9 - 1 - i;
+		rotor_indices[i] = i; 
+		rotor_indices[i + 3*9] = 3*9 - 1 - i;
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
@@ -159,10 +160,11 @@ void PaddleGlDrawable::updateVBOs() {
 	glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(double)*81, rotor_normals, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof(unsigned int)*27, rotor_indices, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER_ARB, sizeof(unsigned int)*2*3*9, rotor_indices, GL_STATIC_DRAW);
 
 	glBindBuffer(GL_ARRAY_BUFFER, NULL);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
+	//TODO delete CPU storage
 }
 
 void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
@@ -171,9 +173,7 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
     {
         const vec3_type& pos = _model->position();
         glTranslated(pos(0), pos(1), pos(2));
-		glRotated(0.0, 0.0, 0.0, 0.0);
-		//glScaled(10, 10, 10);
-       
+
 		// lighting
 		glEnable(GL_LIGHT0);
 		glEnable(GL_COLOR_MATERIAL);
@@ -189,25 +189,27 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glEnableClientState(GL_VERTEX_ARRAY); 
 		glEnableClientState(GL_NORMAL_ARRAY); 
 		
-		// draw rotor
-		glColor3f(.6f, .0f, .0f);
-
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
-		glVertexPointer(3, GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
-		glNormalPointer(GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
-		glDrawElements(GL_TRIANGLES, 3 * 9, GL_UNSIGNED_INT, NULL);
-
 		// draw torus
-		glColor3f(.6f, .9f, .7f); 
-		
+		glColor3f(.6f, .9f, .9f);
+		glRotated(0.0, 0.0, 0.0, 0.0);
+
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[0]);
 		glVertexPointer(3, GL_DOUBLE, 0, NULL);
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[1]);
 		glNormalPointer(GL_DOUBLE, 0, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, torus_buffers[2]);
 		glDrawElements(GL_TRIANGLES, u0*u1*6, GL_UNSIGNED_INT, NULL);
+
+		// draw rotor
+		glColor3f(.4f, .8f, .4f);
+		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
+		glNormalPointer(GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
+		glDrawElements(GL_TRIANGLES, 2*3*9, GL_UNSIGNED_INT, NULL);
 
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);

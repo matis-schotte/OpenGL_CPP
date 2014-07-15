@@ -33,6 +33,9 @@ namespace flappy_box
             const vec3_type& playerControl() const { return _playerControl; }
             void setPlayerControl( const vec3_type& p ) { _playerControl = p; }
             
+			const double bladesAngle() const { return _bladesAngle; }
+			void setBladesAngle(const double a) { _bladesAngle = a; }
+
         private:
             
             vec3_type         _position;
@@ -41,6 +44,7 @@ namespace flappy_box
             vec3_type     _acceleration;
             vec3_type             _size;
             vec3_type    _playerControl; // beschreibt den Bewegungseinfluss durch den Nutzer
+			double _bladesAngle = 0;
             
         }; // Paddle
         

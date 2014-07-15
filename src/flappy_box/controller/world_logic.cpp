@@ -13,8 +13,8 @@ WorldLogic::WorldLogic( const std::shared_ptr< flappy_box::model::World >& b, co
 , _shallRestartTheGame( r )
 {
     xKoord = std::uniform_int_distribution<int>(static_cast<int>(-_model->getWorldHalfWidth()), static_cast<int>(_model->getWorldHalfWidth()));
-    boxSize = std::uniform_int_distribution<int>(3, 10); // random box size
-    newBoxTime = std::uniform_int_distribution<int>(2, 4); // random box size
+    boxSize = std::uniform_int_distribution<int>(2, 6); // random box size
+    newBoxTime = std::uniform_int_distribution<int>(1, 4); // random box creation time
     
     newBoxWhen = 0.0;
     ticks = 0.0;
@@ -125,7 +125,7 @@ void WorldLogic::addBoxToGame( ::controller::Logic& l ) // add boxes to l
     // set max size (world size)
     vec3_type maxP = newBox->maxPosition();
     maxP(0) = _model->getWorldHalfWidth() - newBox->size()/2.0;
-	maxP(1) = 400 - newBox->size() / 2.0;
+	maxP(1) = 0;//400 - newBox->size() / 2.0;
     maxP(2) = _model->getWorldHalfHeight() - newBox->size()/2.0;
     newBox->setMaxPosition(maxP);
     
@@ -133,7 +133,7 @@ void WorldLogic::addBoxToGame( ::controller::Logic& l ) // add boxes to l
     vec3_type pos = newBox->position();
     pos(0) = xKoord(rd);
     if(pos(0) > maxP(0)) pos(0) = maxP(0)-newBox->size(); else if(pos(0) < -maxP(0)) pos(0) = maxP(0)+newBox->size();
-    pos(1) = 200;
+    pos(1) = 0;
     pos(2) = maxP(2) * 0.75;
     newBox->setPosition(pos);
     

@@ -12,6 +12,8 @@ PaddleGlDrawable::PaddleGlDrawable(const std::shared_ptr< ::flappy_box::model::P
 	glGenBuffers(3, torus_buffers);
 	glGenBuffers(3, rotor_buffers);
 	glGenBuffers(4, vortex_buffers);
+    
+    lastKnownPosition = _model->position();
 
 	double vortex_colors[20 * 2 * 4];
 	for (unsigned int i = 0; i < vortex_length; i++) {
@@ -271,9 +273,18 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 				vortex_dat[i][t][1] = vortex_dat[i][t][0] + (vortex_dat[i][t - 1][1] - vortex_dat[i][t - 1][0]) * 1.075;
 			}
 		}
-		vortex_dat[0][0][0] = vec3_type(0, 0, 0);
-		vortex_dat[1][0][0] = vec3_type(0, 0, 0);
-		vortex_dat[2][0][0] = vec3_type(0, 0, 0);
+        
+        // set delta x movement
+        if(lastKnownPosition(0) != pos(0) && abs(lastKnownPosition(0) - pos(0)) > 5)
+        {
+            deltaX = deltaX + (lastKnownPosition(0) - pos(0));
+            lastKnownPosition = pos;
+		}
+        else
+            deltaX = deltaX*0.9;
+        vortex_dat[0][0][0] = vec3_type(-deltaX, 0, 0);
+		vortex_dat[1][0][0] = vec3_type(-deltaX, 0, 0);
+		vortex_dat[2][0][0] = vec3_type(-deltaX, 0, 0);
 
 		// „Startpunkte“ gleichmäßig auf einem Kreis mit Radius (r0 – r1) an der Oberseite des Paddles
 		double a1 = 2 * M_PI * (0 + _model->bladesAngle() / 180) / 3;

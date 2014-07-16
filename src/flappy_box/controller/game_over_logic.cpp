@@ -21,5 +21,10 @@ bool GameOverLogic::advance( ::controller::Logic& l, ::controller::InputEventHan
         world->setShouldRestart(true);
     }
     
+    if(ev.key == 'q' || ev.key == 'q')
+    {
+        exit(0);
+    }
+    
     return false;
 }

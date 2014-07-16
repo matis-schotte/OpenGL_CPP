@@ -29,6 +29,8 @@ void GameOverGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w
         renderBitmapString(text);
         glRasterPos3d(-6., 0., 0.);
         renderBitmapString("Restart by pressing r");
+        glRasterPos3d(-5., 0., -3.);
+        renderBitmapString("Quit by pressing q");
         glEnable(GL_LIGHTING);
     }
     glPopMatrix();

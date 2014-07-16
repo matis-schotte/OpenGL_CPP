@@ -17,13 +17,13 @@ PaddleGlDrawable::PaddleGlDrawable(const std::shared_ptr< ::flappy_box::model::P
 	for (unsigned int i = 0; i < vortex_length; i++) {
 		double alpha = 0.25*pow(sin(M_PI*static_cast<double>(i) / static_cast<double>(vortex_length-1)), 2);
 		
-		vortex_colors[i * 8 + 0] = 0.8;
-		vortex_colors[i * 8 + 1] = 0.8;
+		vortex_colors[i * 8 + 0] = 1.0;
+		vortex_colors[i * 8 + 1] = 1.0;
 		vortex_colors[i * 8 + 2] = 1.0;
 		vortex_colors[i * 8 + 3] = alpha;
 
-		vortex_colors[i * 8 + 4] = 0.8;
-		vortex_colors[i * 8 + 5] = 0.8;
+		vortex_colors[i * 8 + 4] = 1.0;
+		vortex_colors[i * 8 + 5] = 1.0;
 		vortex_colors[i * 8 + 6] = 1.0;
 		vortex_colors[i * 8 + 7] = alpha;
 	}
@@ -264,11 +264,11 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 			for (unsigned int t = vortex_length - 1; t > 0; --t) {
 				vec3_type p = vortex_dat[i][t][1];
 				p[0] -= 0.5 * vortex_width;
-				*(dat++) = static_cast<double>(p[0]);
+				*(dat++) = static_cast<double>(-1*p[0]);
 				*(dat++) = static_cast<double>(p[1]);
 				*(dat++) = static_cast<double>(p[2]);
 				p[0] += vortex_width;
-				*(dat++) = static_cast<double>(p[0]);
+				*(dat++) = static_cast<double>(-1*p[0]);
 				*(dat++) = static_cast<double>(p[1]);
 				*(dat++) = static_cast<double>(p[2]);
 			}
@@ -278,6 +278,8 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		glDisable(GL_CULL_FACE);
+		glDisable(GL_LIGHTING);
+		glDepthMask(GL_FALSE);
 
 		glEnableClientState(GL_COLOR_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[0]);
@@ -297,7 +299,9 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisable(GL_BLEND);
-		glDisable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
+		glEnable(GL_LIGHTING);
+		glDepthMask(GL_TRUE);
 
 		// draw rotor
 		glColor3f(.4f, .8f, .4f);

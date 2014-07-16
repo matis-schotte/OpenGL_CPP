@@ -46,7 +46,7 @@ void WorldGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         
         // FOG
         glFogi(GL_FOG_MODE, GL_LINEAR);
-        glFogfv(GL_FOG_COLOR, fogColor);
+        glFogfv(GL_FOG_COLOR, getFogColor());
         glFogf(GL_FOG_DENSITY, 1.0f);
         glHint(GL_FOG_HINT, GL_DONT_CARE);
         glFogf(GL_FOG_START, 0.0f);

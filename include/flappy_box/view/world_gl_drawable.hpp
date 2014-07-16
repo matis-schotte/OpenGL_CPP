@@ -23,7 +23,15 @@ namespace flappy_box
             std::shared_ptr< model::World const > _model;
             static std::vector<tinyobj::shape_t> shapes;
             int bw = 0;
-            GLfloat fogColor[4]= {1.f, 1.f, 1.f, 1.0f};
+
+			GLfloat fogColor[4];
+			GLfloat* getFogColor() { 
+				fogColor[0] = 1.f;  
+				fogColor[1] = 1.f; 
+				fogColor[2] = 1.f; 
+				fogColor[3] = 1.f; 
+				return fogColor;
+		};
             
         }; // BoxGlDrawable
     }

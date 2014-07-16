@@ -191,20 +191,6 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_NORMAL_ARRAY);
         
-        // draw rotor
-		glColor3f(.4f, .8f, .4f);
-		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
-        
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
-		glVertexPointer(3, GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
-		glNormalPointer(GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
-		glDrawElements(GL_TRIANGLES, 2*3*9, GL_UNSIGNED_INT, NULL);
-        
-		glBindBuffer(GL_ARRAY_BUFFER, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
-        
 		// draw torus
         glColor3f(.6f, .9f, .9f);
 		glRotated(0.0, 0.0, 0.0, 0.0);
@@ -217,6 +203,20 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, torus_buffers[2]);
 		glDrawElements(GL_TRIANGLES, u0*u1*6, GL_UNSIGNED_INT, NULL);
 
+		glBindBuffer(GL_ARRAY_BUFFER, NULL);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
+        
+        // draw rotor
+		glColor3f(.4f, .8f, .4f);
+		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
+        
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
+		glNormalPointer(GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
+		glDrawElements(GL_TRIANGLES, 2*3*9, GL_UNSIGNED_INT, NULL);
+        
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
         

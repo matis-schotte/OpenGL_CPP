@@ -48,7 +48,7 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     
 	double t = l.game_model()->timestep().count();
 	double bladesAngle = _model->bladesAngle();
-	bladesAngle += 250 * t; // changed from 720
+	bladesAngle += 720 * t;
 	bladesAngle = bladesAngle - ((static_cast<int>(bladesAngle) / 360) * 360); // avoid overflow
 	_model->setBladesAngle(bladesAngle);
 

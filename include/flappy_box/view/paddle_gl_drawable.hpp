@@ -29,7 +29,7 @@ namespace flappy_box
 			const unsigned int blade_count = 9;
 			const unsigned int vortex_length = 20;
 			const unsigned int vortex_speed = 100;
-			GLuint vortex_width = 2;
+			GLdouble vortex_width = 0.8;
 			vec3_type vortex_dat[3][20][2];
 
 			GLuint torus_buffers[3];

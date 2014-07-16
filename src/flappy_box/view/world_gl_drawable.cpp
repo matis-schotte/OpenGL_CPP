@@ -29,6 +29,15 @@ void WorldGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 {
     glPushMatrix();
     {
+        // render points and remaining lives
+        glDisable(GL_LIGHTING);
+        char text[32];
+        sprintf(text, "Points: %u Remaining Lives: %i", _model->playerPoints(), _model->remainingLives());
+        glColor3f(1.0f, .0f, .0f);
+        glRasterPos3d(-45., 0., 30.5);
+        renderBitmapString(text);
+        glEnable(GL_LIGHTING);
+        
         //setup for the world
         glTranslated( 0., 200., 2. );
         glScaled( 50., 120., 30. );
@@ -72,4 +81,10 @@ void WorldGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         glDisable(GL_FOG);
     }
     glPopMatrix();
+}
+
+void WorldGlDrawable::renderBitmapString(const char *string)
+{
+    for(const char *c = string; *c != '\0'; c++)
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
 }

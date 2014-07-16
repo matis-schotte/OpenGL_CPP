@@ -24,12 +24,12 @@ void GameOverGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w
         glDisable(GL_LIGHTING);
         char text[64];
         sprintf(text, "Game Over - Score: %u", _model->playerPoints());
-        glColor3f(1.0f, .0f, .0f);
-        glRasterPos3d(-7., 0., 3.);
+        glColor3f(_model->fadingColor(), 0., 0.);
+        glRasterPos3d(-8., 0., 3.5);
         renderBitmapString(text);
-        glRasterPos3d(-6., 0., 0.);
+        glRasterPos3d(-7., 0., 0.5);
         renderBitmapString("Restart by pressing r");
-        glRasterPos3d(-5., 0., -3.);
+        glRasterPos3d(-6., 0., -2.5);
         renderBitmapString("Quit by pressing q");
         glEnable(GL_LIGHTING);
     }

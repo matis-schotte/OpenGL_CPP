@@ -24,6 +24,9 @@ namespace flappy_box
             const bool& shouldRestart() const { return _shouldRestart; }
             void setShouldRestart( const bool& r ) { _shouldRestart = r; }
             
+            const vec3_type& position() const { return _position; }
+            void setPosition( const vec3_type& p ) { _position = p; }
+            
             const double getWorldHalfHeight() const { return 30.0; }; /* gibt die halbe Ausdehnung der Spielwelt in z-Richtung zurück */
             const double getWorldHalfWidth() const { return 42.0; }; /* gibt die halbe Ausdehnung der Spielwelt in x-Richtung zurück */
             
@@ -32,6 +35,7 @@ namespace flappy_box
             int                  _playerPoints;
             int                _remainingLives;
             bool                _shouldRestart;
+            vec3_type                _position;
             
         }; // World
         

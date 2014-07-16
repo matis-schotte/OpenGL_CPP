@@ -18,9 +18,13 @@ namespace flappy_box
             const int& playerPoints() const { return _playerPoints; }
             // set-methode schlägt fehl, da const int -> unveränderbarer wert
             
+            const double& fadingColor() const { return _fadingColor; }
+            void setFadingColor( const double& r ) { _fadingColor = r; }
+            
         private:
             
             const int                  _playerPoints;
+            double                      _fadingColor;
             
         }; // GameOver
         

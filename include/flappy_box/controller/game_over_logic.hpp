@@ -17,6 +17,7 @@ namespace flappy_box
             
         private:
             std::shared_ptr< model::GameOver > _model;
+            double v = 1.; // text flashing speed
         };
     }
     

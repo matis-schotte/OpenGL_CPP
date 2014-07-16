@@ -39,7 +39,9 @@ void WorldGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         glEnable(GL_LIGHTING);
         
         //setup for the world
-        glTranslated( 0., 200., 2. );
+        const vec3_type& pos = _model->position();
+        glTranslated( pos(0), pos(1), pos(2) );
+        //glTranslated( 0., 200., 2. );
         glScaled( 50., 120., 30. );
         
         //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
@@ -58,7 +60,7 @@ void WorldGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         for(size_t i = 0; i < shapes.size(); i++)
             for(size_t f = 0; f < shapes[i].mesh.indices.size(); f++)
             {
-                if((f%3) == 0) // berechnen der normalen
+                if((f%3) == 0) // berechnen der farben
                 {
                     // b/w color
                     if(bw == 1)

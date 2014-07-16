@@ -192,7 +192,7 @@ void WorldLogic::restartGame( ::controller::Logic& l )
     // reject invalidation for world object
     _model->setAlive( true );
     _model->setPlayerPoints( 0 );
-    _model->setRemainingLives( 1 );
+    _model->setRemainingLives( 9 );
     
     // create and configure new paddle object
     paddle = std::make_shared< flappy_box::model::Paddle >("Paddle");

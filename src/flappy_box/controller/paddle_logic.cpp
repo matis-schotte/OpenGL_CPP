@@ -27,6 +27,7 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     vec3_type aneu = _model->playerControl()*1000; // Skalierung=1000
     vec3_type vneu = valt*0.8 + aneu*dt; // decay=0.8
     if(vneu(0) > 100.) vneu(0) = 100.; // limit speed to 100.
+    if(vneu(0) < -100.) vneu(0) = -100.;
     vec3_type pneu = palt + vneu*dt;
     
     //_model->size();

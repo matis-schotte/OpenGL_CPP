@@ -34,6 +34,7 @@ void PaddleAlAudible::auralize( ::view::AlRenderer& renderer )
         // pitch = speed
         vec3_type speed = _model->velocity();
         double p = ((speed(0)>0)?speed(0):-speed(0)) / 100. + 0.5;
+        
         alSourcef(source, AL_PITCH, p);
     }
     else

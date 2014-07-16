@@ -31,6 +31,9 @@ namespace flappy_box
 			const unsigned int vortex_speed = 100;
 			GLdouble vortex_width = 0.8;
 			vec3_type vortex_dat[3][20][2];
+            
+            double deltaX = 0;
+            vec3_type lastKnownPosition;
 
 			GLuint torus_buffers[3];
 			GLuint rotor_buffers[3];

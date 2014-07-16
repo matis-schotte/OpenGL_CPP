@@ -26,5 +26,12 @@ bool GameOverLogic::advance( ::controller::Logic& l, ::controller::InputEventHan
         exit(0);
     }
     
+    const double dt = l.game_model()->timestep().count();
+    double d = _model->fadingColor()+v*dt;
+    if(d > 1.) v = -1.;
+    if(d < 0.) v = +1.;
+    _model->setFadingColor(d);
+    
+    
     return false;
 }

@@ -23,6 +23,8 @@ WorldLogic::WorldLogic( const std::shared_ptr< flappy_box::model::World >& b, co
 
 bool WorldLogic::advance( ::controller::Logic& l, ::controller::InputEventHandler::keyboard_event const& ev )
 {
+    travelWorld(l);
+    
     if(_shallRestartTheGame)
         restartGame(l);
     
@@ -119,6 +121,22 @@ bool WorldLogic::advance( ::controller::Logic& l, ::controller::InputEventHandle
         } // outer loop
     
     return false;
+}
+
+void WorldLogic::travelWorld( ::controller::Logic& l )
+{
+    vec3_type palt = _model->position();
+    vec3_type valt = vec3_type(0., -10., 0.);
+    const double dt = l.game_model()->timestep().count();
+    
+    // gesucht: v, p
+    vec3_type vneu = valt;
+    vec3_type pneu = palt + vneu*dt;
+    
+    if(pneu(1) < 170)
+        pneu(1) = 200;
+    
+    _model->setPosition(pneu);
 }
 
 void WorldLogic::addBoxToGame( ::controller::Logic& l ) // add boxes to l

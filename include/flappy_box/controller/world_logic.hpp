@@ -21,6 +21,7 @@ namespace flappy_box
             
         private:
             
+            void travelWorld( ::controller::Logic& l );
             void addBoxToGame( ::controller::Logic& l );
             void setForce( std::shared_ptr< flappy_box::model::Box > & box, std::shared_ptr< flappy_box::model::Paddle > & paddle );
             void restartGame( ::controller::Logic& l );

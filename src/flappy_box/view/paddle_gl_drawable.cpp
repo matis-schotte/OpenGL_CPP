@@ -12,19 +12,21 @@ PaddleGlDrawable::PaddleGlDrawable(const std::shared_ptr< ::flappy_box::model::P
 	glGenBuffers(3, torus_buffers);
 	glGenBuffers(3, rotor_buffers);
 	glGenBuffers(4, vortex_buffers);
+    
+    lastKnownPosition = _model->position();
 
 	double vortex_colors[20 * 2 * 4];
 	for (unsigned int i = 0; i < vortex_length; i++) {
 		double alpha = 0.25*pow(sin(M_PI*static_cast<double>(i) / static_cast<double>(vortex_length-1)), 2);
 		
-		vortex_colors[i * 8 + 0] = 1.0;
+		vortex_colors[i * 8 + 0] = 0.8;
 		vortex_colors[i * 8 + 1] = 1.0;
-		vortex_colors[i * 8 + 2] = 1.0;
+		vortex_colors[i * 8 + 2] = 0.8;
 		vortex_colors[i * 8 + 3] = alpha;
 
-		vortex_colors[i * 8 + 4] = 1.0;
+		vortex_colors[i * 8 + 4] = 0.8;
 		vortex_colors[i * 8 + 5] = 1.0;
-		vortex_colors[i * 8 + 6] = 1.0;
+		vortex_colors[i * 8 + 6] = 0.8;
 		vortex_colors[i * 8 + 7] = alpha;
 	}
 
@@ -214,21 +216,39 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		// Enable LIGHTING
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
-		glEnable(GL_COLOR_MATERIAL);
+        
+        // Create light components
+        GLfloat ambientLight[] = { 0.2f, .2f, 0.2f, 1.0f };
+        GLfloat diffuseLight[] = { 0.5f, 1.f, 0.5f, 1.0f };
+        GLfloat specularLight[] = { 1.f, 1.0f, 1.f, 1.0f };
+        
+        // Assign created components to GL_LIGHT0
+        glLightfv(GL_LIGHT0, GL_AMBIENT, ambientLight);
+        glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuseLight);
+        glLightfv(GL_LIGHT0, GL_SPECULAR, specularLight);
+        
+        glEnable(GL_COLOR_MATERIAL);
 		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+        
 		GLfloat lPos[4] = {
 			static_cast<float>(pos(0) - size(0) / 2.),
 			static_cast<float>(pos(1) - (r0*1.5) - 10.),
-			static_cast<float>(pos(2) + (r1*3.0) + 100.),
+			static_cast<float>(pos(2) + (r1*3.0) + 30.),
 			1.0f
 		};
 		glLightfv(GL_LIGHT0, GL_POSITION, lPos);
-
+        
+        float specReflection[] = { 1.f, 1.f, 1.f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_SPECULAR, specReflection);
+        float em[] = { .0f, .1f, .0f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_EMISSION, em);
+        glMateriali(GL_FRONT, GL_SHININESS, 96);
+        
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_NORMAL_ARRAY);
         
 		// draw torus
-		glColor3f(.6f, .9f, .9f);
+		glColor3f(1.f, 1.f, 1.f);
 		glRotated(0.0, 0.0, 0.0, 0.0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[0]);
@@ -237,7 +257,14 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glNormalPointer(GL_DOUBLE, 0, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, torus_buffers[2]);
 		glDrawElements(GL_TRIANGLES, u0*u1 * 6, GL_UNSIGNED_INT, NULL);
-
+        
+        float specReflectionn[] = { 0.f, 0.f, 0.f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_SPECULAR, specReflectionn);
+        float emn[] = { 0.f, 0.f, 0.f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_EMISSION, emn);
+        glMateriali(GL_FRONT, GL_SHININESS, 96);
+        glDisable(GL_LIGHTING);
+        
 		// draw vortex
 		double timestep_sec = r.game_model()->timestep().count();
 		for (unsigned int i = 0; i < 3; i++) {
@@ -246,9 +273,18 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 				vortex_dat[i][t][1] = vortex_dat[i][t][0] + (vortex_dat[i][t - 1][1] - vortex_dat[i][t - 1][0]) * 1.075;
 			}
 		}
-		vortex_dat[0][0][0] = pos;
-		vortex_dat[1][0][0] = pos;
-		vortex_dat[2][0][0] = pos;
+        
+        // set delta x movement
+        if(lastKnownPosition(0) != pos(0) && abs(lastKnownPosition(0) - pos(0)) > 5)
+        {
+            deltaX = deltaX + (lastKnownPosition(0) - pos(0));
+            lastKnownPosition = pos;
+		}
+        else
+            deltaX = deltaX*0.9;
+        vortex_dat[0][0][0] = vec3_type(-deltaX, 0, 0);
+		vortex_dat[1][0][0] = vec3_type(-deltaX, 0, 0);
+		vortex_dat[2][0][0] = vec3_type(-deltaX, 0, 0);
 
 		// „Startpunkte“ gleichmäßig auf einem Kreis mit Radius (r0 – r1) an der Oberseite des Paddles
 		double a1 = 2 * M_PI * (0 + _model->bladesAngle() / 180) / 3;
@@ -258,17 +294,20 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		double a3 = 2 * M_PI * (2 + _model->bladesAngle() / 180) / 3;
 		vortex_dat[2][0][1] = vec3_type((r0 - r1) * cos(a3), (r0 - r1) * sin(a3), 0);
 
-		for (unsigned int i = 0; i < 3; i++) {
+		for(unsigned int i = 0; i < 3; i++)
+        {
 			glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[i + 1]);
 			double* dat = static_cast<double*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
-			for (unsigned int t = vortex_length - 1; t > 0; --t) {
+            
+			for(unsigned int t = vortex_length - 1; t > 0; --t)
+            {
 				vec3_type p = vortex_dat[i][t][1];
 				p[0] -= 0.5 * vortex_width;
-				*(dat++) = static_cast<double>(-1*p[0]);
+				*(dat++) = static_cast<double>(p[0]);
 				*(dat++) = static_cast<double>(p[1]);
 				*(dat++) = static_cast<double>(p[2]);
-				p[0] += vortex_width;
-				*(dat++) = static_cast<double>(-1*p[0]);
+				p[0] += 0.5 * vortex_width;
+				*(dat++) = static_cast<double>(p[0]);
 				*(dat++) = static_cast<double>(p[1]);
 				*(dat++) = static_cast<double>(p[2]);
 			}
@@ -278,8 +317,6 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		glDisable(GL_CULL_FACE);
-		glDisable(GL_LIGHTING);
-		glDepthMask(GL_FALSE);
 
 		glEnableClientState(GL_COLOR_ARRAY);
 		glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[0]);
@@ -300,9 +337,8 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
 		glDisableClientState(GL_COLOR_ARRAY);
 		glDisable(GL_BLEND);
 		glEnable(GL_CULL_FACE);
-		glEnable(GL_LIGHTING);
-		glDepthMask(GL_TRUE);
-
+        glEnable(GL_LIGHTING);
+        
 		// draw rotor
 		glColor3f(.4f, .8f, .4f);
 		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
@@ -322,6 +358,9 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         
 		glDisableClientState(GL_VERTEX_ARRAY);
 		glDisableClientState(GL_NORMAL_ARRAY);
+        
+        //glDisable(GL_LIGHT0);
+        //glDisable(GL_LIGHTING);
     }
     glPopMatrix();
 }

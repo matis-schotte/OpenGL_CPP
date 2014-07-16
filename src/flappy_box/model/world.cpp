@@ -7,5 +7,6 @@ World::World( const std::string& n )
 ,           _playerPoints( 0 )
 ,         _remainingLives( 0 )
 ,          _shouldRestart( false )
+,               _position( 0., 200., 2. )
 {
 }

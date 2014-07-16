@@ -11,6 +11,7 @@ WorldLogic::WorldLogic( const std::shared_ptr< flappy_box::model::World >& b, co
 : ::controller::Logic::ObjectLogic()
 , _model( b )
 , _shallRestartTheGame( r )
+, _gameOverScreen( false )
 {
     xKoord = std::uniform_int_distribution<int>(static_cast<int>(-_model->getWorldHalfWidth()), static_cast<int>(_model->getWorldHalfWidth()));
     boxSize = std::uniform_int_distribution<int>(1, 3); // random box size
@@ -26,7 +27,7 @@ bool WorldLogic::advance( ::controller::Logic& l, ::controller::InputEventHandle
         restartGame(l);
     
     ticks += l.game_model()->timestep().count();
-    if(ticks > newBoxWhen)
+    if(ticks > newBoxWhen && !_gameOverScreen)
     {
         newBoxWhen = (double)newBoxTime(rd);
         ticks = 0.0;
@@ -53,9 +54,9 @@ bool WorldLogic::advance( ::controller::Logic& l, ::controller::InputEventHandle
         l.game_model()->addGameObject( paddle );
     }
     
-    _model->setPlayerPoints(_model->playerPoints()+1); // add points over time
+    if(!_gameOverScreen) _model->setPlayerPoints(_model->playerPoints()+1); // add points over time
     
-    if(_model->remainingLives() <= 0)
+    if(_model->remainingLives() <= 0 && !_gameOverScreen)
     {
         // invalidate game model
         for(auto go : l.game_model()->objects())
@@ -66,50 +67,56 @@ bool WorldLogic::advance( ::controller::Logic& l, ::controller::InputEventHandle
         
         // add game over gameobject
         l.game_model()->addGameObject( std::make_shared< flappy_box::model::GameOver >( _model->playerPoints() ) );
+        _gameOverScreen = true;
+    }
+    else if(_model->remainingLives() <= 0 && _gameOverScreen && _model->shouldRestart())
+    {
+        _gameOverScreen = false;
         _shallRestartTheGame = true;
     }
     
-    for(auto go : l.game_model()->objects())
-    {
-        std::shared_ptr< flappy_box::model::Box > box = std::dynamic_pointer_cast< flappy_box::model::Box >(go);
-        if(box && box->isAlive())
+    if(!_gameOverScreen)
+        for(auto go : l.game_model()->objects())
         {
-            if(box->position()(2) <= paddle->position()(2))
+            std::shared_ptr< flappy_box::model::Box > box = std::dynamic_pointer_cast< flappy_box::model::Box >(go);
+            if(box && box->isAlive())
             {
-                box->setAlive(false);
-                _model->setRemainingLives(_model->remainingLives()-1);
-            }
-            else
-            {
-                setForce(box, paddle);
-                
-                for(auto boxColl : l.game_model()->objects())
+                if(box->position()(2) <= paddle->position()(2))
                 {
-                    std::shared_ptr< flappy_box::model::Box > boxCollision = std::dynamic_pointer_cast< flappy_box::model::Box >(boxColl);
+                    box->setAlive(false);
+                    _model->setRemainingLives(_model->remainingLives()-1);
+                }
+                else
+                {
+                    setForce(box, paddle);
                     
-                    // check for collisions
-                    if(boxCollision && boxCollision->isAlive() && box != boxCollision)
+                    for(auto boxColl : l.game_model()->objects())
                     {
-                        // umhüllende kugel mit center=position und radius=size
-                        // schnitt-test: theoretisch abstand beider center berechnen und dieser abstandd muss größer sein als beide radien
-                        // see http://www.ina-de-brabandt.de/vektoren/a/abstand-2p-in-r3.html
+                        std::shared_ptr< flappy_box::model::Box > boxCollision = std::dynamic_pointer_cast< flappy_box::model::Box >(boxColl);
                         
-                        if((boxCollision->size() + box->size()) > sqrt((boxCollision->position() - box->position()).cwiseAbs2().sum()))
-                        { // collision detected
-                            boxCollision->setAlive(false);
-                            box->setAlive(false);
+                        // check for collisions
+                        if(boxCollision && boxCollision->isAlive() && box != boxCollision)
+                        {
+                            // umhüllende kugel mit center=position und radius=size
+                            // schnitt-test: theoretisch abstand beider center berechnen und dieser abstandd muss größer sein als beide radien
+                            // see http://www.ina-de-brabandt.de/vektoren/a/abstand-2p-in-r3.html
                             
-                            // bonus points
-                            _model->setPlayerPoints(_model->playerPoints()+10);
-                            
-                            // box is not alive anymore, exit inner loop
-                            break;
+                            if((boxCollision->size() + box->size()) > sqrt((boxCollision->position() - box->position()).cwiseAbs2().sum()))
+                            { // collision detected
+                                boxCollision->setAlive(false);
+                                box->setAlive(false);
+                                
+                                // bonus points
+                                _model->setPlayerPoints(_model->playerPoints()+10);
+                                
+                                // box is not alive anymore, exit inner loop
+                                break;
+                            }
                         }
-                    }
-                } // inner loop
+                    } // inner loop
+                }
             }
-        }
-    } // outer loop
+        } // outer loop
     
     return false;
 }
@@ -185,7 +192,7 @@ void WorldLogic::restartGame( ::controller::Logic& l )
     // reject invalidation for world object
     _model->setAlive( true );
     _model->setPlayerPoints( 0 );
-    _model->setRemainingLives( 9 );
+    _model->setRemainingLives( 1 );
     
     // create and configure new paddle object
     paddle = std::make_shared< flappy_box::model::Paddle >("Paddle");

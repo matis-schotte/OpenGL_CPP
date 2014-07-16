@@ -15,6 +15,8 @@ WorldAlAudible::WorldAlAudible( std::shared_ptr< ::flappy_box::model::World > co
 {
     // play the sound
     SoundProvider::getInstance()->playSound("beat.wav", 0.0, 0.2, 0.8, true);
+    SoundProvider::getInstance()->playSound("high.wav", 0.0, 0.2, 0.8, true);
+    SoundProvider::getInstance()->playSound("synth.wav", 0.0, 0.2, 1.0, true);
 }
 
 void WorldAlAudible::auralize( ::view::AlRenderer& renderer )

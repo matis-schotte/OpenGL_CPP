@@ -17,6 +17,9 @@ namespace flappy_box
         private:
             std::shared_ptr< model::Paddle const > _model;
             
+            ALuint buffer, source;
+            double x_pos;
+            
         }; // BoxAlAudible
     }
 }

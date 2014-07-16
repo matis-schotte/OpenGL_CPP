@@ -13,8 +13,8 @@ WorldLogic::WorldLogic( const std::shared_ptr< flappy_box::model::World >& b, co
 , _shallRestartTheGame( r )
 {
     xKoord = std::uniform_int_distribution<int>(static_cast<int>(-_model->getWorldHalfWidth()), static_cast<int>(_model->getWorldHalfWidth()));
-    boxSize = std::uniform_int_distribution<int>(2, 6); // random box size
-    newBoxTime = std::uniform_int_distribution<int>(1, 4); // random box creation time
+    boxSize = std::uniform_int_distribution<int>(1, 3); // random box size
+    newBoxTime = std::uniform_int_distribution<int>(1, 2); // random box creation time
     
     newBoxWhen = 0.0;
     ticks = 0.0;
@@ -143,7 +143,7 @@ void WorldLogic::addBoxToGame( ::controller::Logic& l ) // add boxes to l
 void WorldLogic::setForce( std::shared_ptr< flappy_box::model::Box > & box, std::shared_ptr< flappy_box::model::Paddle > & paddle )
 {
     // apply force to boxes
-    double s = 10 * box->size()*box->size();
+    double s = 5 * box->size()*box->size();
     
     // box muss vollständig im paddle-bereich liegen; also muss paddle immer kleiner im -bereich oder größer im +bereich sein
     if(paddle->position()(0)-0.5*paddle->size()(0) < box->position()(0)-0.5*box->size() &&
@@ -167,7 +167,7 @@ void WorldLogic::setForce( std::shared_ptr< flappy_box::model::Box > & box, std:
         vec3_type f = (boxPos-padPos);
         f.normalize();
         
-        double k = f.dot(vec3_type(0., 0., 1.)) * 2; // mit skalar multiplizieren
+        double k = f.dot(vec3_type(0., 0., 1.)); // mit skalar multiplizieren?
         
         f = f * s * k;
         box->setExternalForce(f);

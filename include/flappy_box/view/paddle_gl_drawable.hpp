@@ -27,10 +27,14 @@ namespace flappy_box
 			const unsigned int u0 = 40;
 			const unsigned int u1 = 15;
 			const unsigned int blade_count = 9;
+			const unsigned int vortex_length = 20;
+			const unsigned int vortex_speed = 100;
+			GLuint vortex_width = 2;
+			vec3_type vortex_dat[3][20][2];
 
 			GLuint torus_buffers[3];
 			GLuint rotor_buffers[3];
-            
+			GLuint vortex_buffers[4];            
         }; // BoxGlDrawable
     }
 }

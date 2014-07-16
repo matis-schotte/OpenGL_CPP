@@ -11,6 +11,41 @@ PaddleGlDrawable::PaddleGlDrawable(const std::shared_ptr< ::flappy_box::model::P
 {
 	glGenBuffers(3, torus_buffers);
 	glGenBuffers(3, rotor_buffers);
+	glGenBuffers(4, vortex_buffers);
+
+	double vortex_colors[20 * 2 * 4];
+	for (unsigned int i = 0; i < vortex_length; i++) {
+		double alpha = 0.25*pow(sin(M_PI*static_cast<double>(i) / static_cast<double>(vortex_length-1)), 2);
+		
+		vortex_colors[i * 8 + 0] = 0.5;
+		vortex_colors[i * 8 + 1] = 0.5;
+		vortex_colors[i * 8 + 2] = 0.5;
+		vortex_colors[i * 8 + 3] = alpha;
+
+		vortex_colors[i * 8 + 4] = 0.5;
+		vortex_colors[i * 8 + 5] = 0.5;
+		vortex_colors[i * 8 + 6] = 0.5;
+		vortex_colors[i * 8 + 7] = alpha;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 20; j++) {
+			vortex_dat[i][j][0] = _model->position();
+			vortex_dat[i][j][1] = _model->position();
+		}
+	}
+	
+	glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[0]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(double)* 160, vortex_colors, GL_STATIC_DRAW);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[1]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(double)* 20 * 2 * 3, NULL, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[2]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(double)* 20 * 2 * 3, NULL, GL_DYNAMIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[3]);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(double)* 20 * 2 * 3, NULL, GL_DYNAMIC_DRAW);
+	
+	glBindBuffer(GL_ARRAY_BUFFER, NULL);
 
 	vec3_type size = _model->size();
 	r0 = std::max(size(0), size(1)) / 2; // die Hälfte des Maximums aus der Paddle-Breite und der –Tiefe
@@ -23,6 +58,7 @@ PaddleGlDrawable::~PaddleGlDrawable()
 {
 	glDeleteBuffers(3, torus_buffers);
 	glDeleteBuffers(3, rotor_buffers);
+	glDeleteBuffers(4, vortex_buffers);
 }
 
 void PaddleGlDrawable::updateVBOs() {
@@ -175,48 +211,108 @@ void PaddleGlDrawable::visualize( ::view::GlRenderer& r, ::view::GlutWindow& w )
         const vec3_type& size = _model->size();
         glTranslated(pos(0), pos(1), pos(2));
         
-        // Enable LIGHTING
-        glEnable(GL_LIGHTING);
+		// Enable LIGHTING
+		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 		glEnable(GL_COLOR_MATERIAL);
 		glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-		GLfloat lPos[4] = { 
-			static_cast<float>(pos(0) - size(0)/2.),
+		GLfloat lPos[4] = {
+			static_cast<float>(pos(0) - size(0) / 2.),
 			static_cast<float>(pos(1) - (r0*1.5) - 10.),
 			static_cast<float>(pos(2) + (r1*3.0) + 100.),
-			1.0f 
+			1.0f
 		};
 		glLightfv(GL_LIGHT0, GL_POSITION, lPos);
-        
-        glEnableClientState(GL_VERTEX_ARRAY);
+
+		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_NORMAL_ARRAY);
         
-        // draw rotor
-		glColor3f(.4f, .8f, .4f);
-		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
-        
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
-		glVertexPointer(3, GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
-		glNormalPointer(GL_DOUBLE, 0, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
-		glDrawElements(GL_TRIANGLES, 2*3*9, GL_UNSIGNED_INT, NULL);
-        
-		glBindBuffer(GL_ARRAY_BUFFER, NULL);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
-        
 		// draw torus
-        glColor3f(.6f, .9f, .9f);
+		glColor3f(.6f, .9f, .9f);
 		glRotated(0.0, 0.0, 0.0, 0.0);
-        //glScaled(1.8, 1.8, 1.8);
-        
+
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[0]);
 		glVertexPointer(3, GL_DOUBLE, 0, NULL);
 		glBindBuffer(GL_ARRAY_BUFFER, torus_buffers[1]);
 		glNormalPointer(GL_DOUBLE, 0, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, torus_buffers[2]);
-		glDrawElements(GL_TRIANGLES, u0*u1*6, GL_UNSIGNED_INT, NULL);
+		glDrawElements(GL_TRIANGLES, u0*u1 * 6, GL_UNSIGNED_INT, NULL);
 
+		// draw vortex
+		double timestep_sec = r.game_model()->timestep().count();
+		for (unsigned int i = 0; i < 3; i++) {
+			for (unsigned int t = vortex_length - 1; t > 0; --t) {
+				vortex_dat[i][t][0] = vortex_dat[i][t - 1][0] + vec3_type(0, 0, timestep_sec * vortex_speed);
+				vortex_dat[i][t][1] = vortex_dat[i][t][0] + (vortex_dat[i][t - 1][1] - vortex_dat[i][t - 1][0]) * 1.075;
+			}
+		}
+		vortex_dat[0][0][0] = pos;
+		vortex_dat[1][0][0] = pos;
+		vortex_dat[2][0][0] = pos;
+
+		// „Startpunkte“ gleichmäßig auf einem Kreis mit Radius (r0 – r1) an der Oberseite des Paddles
+		double a1 = 2 * M_PI * (0 + _model->bladesAngle() / 120) / 3;
+		vortex_dat[0][0][1] = vec3_type((r0 - r1) * cos(a1), (r0 - r1) * sin(a1), 0);
+		double a2 = 2 * M_PI * (1 + _model->bladesAngle() / 120) / 3;
+		vortex_dat[1][0][1] = vec3_type((r0 - r1) * cos(a2), (r0 - r1) * sin(a2), 0);
+		double a3 = 2 * M_PI * (2 + _model->bladesAngle() / 120) / 3;
+		vortex_dat[2][0][1] = vec3_type((r0 - r1) * cos(a3), (r0 - r1) * sin(a3), 0);
+
+		for (unsigned int i = 0; i < 3; i++) {
+			glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[i + 1]);
+			double* dat = static_cast<double*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+			for (unsigned int t = vortex_length - 1; t > 0; --t) {
+				vec3_type p = vortex_dat[i][t][1];
+				p[0] -= 0.5 * vortex_width;
+				*(dat++) = static_cast<double>(p[0]);
+				*(dat++) = static_cast<double>(p[1]);
+				*(dat++) = static_cast<double>(p[2]);
+				p[0] += vortex_width;
+				*(dat++) = static_cast<double>(p[0]);
+				*(dat++) = static_cast<double>(p[1]);
+				*(dat++) = static_cast<double>(p[2]);
+			}
+			glUnmapBuffer(GL_ARRAY_BUFFER);
+		}
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		glDisable(GL_CULL_FACE);
+
+		glEnableClientState(GL_COLOR_ARRAY);
+		glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[0]);
+		glColorPointer(4, GL_DOUBLE, 0, NULL);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[1]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 20*2);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[2]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 20*2);
+
+		glBindBuffer(GL_ARRAY_BUFFER, vortex_buffers[3]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 20*2);
+
+		glDisableClientState(GL_COLOR_ARRAY);
+		glDisable(GL_BLEND);
+		glDisable(GL_CULL_FACE);
+
+		// draw rotor
+		glColor3f(.4f, .8f, .4f);
+		glRotated(_model->bladesAngle(), 0.0, 0.0, 1.0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[0]);
+		glVertexPointer(3, GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ARRAY_BUFFER, rotor_buffers[1]);
+		glNormalPointer(GL_DOUBLE, 0, NULL);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, rotor_buffers[2]);
+		glDrawElements(GL_TRIANGLES, 2 * 3 * 9, GL_UNSIGNED_INT, NULL);
+
+		// reset buffers and states
+		glBindBuffer(GL_COLOR_ARRAY, NULL);
+		glBindBuffer(GL_VERTEX_ARRAY, NULL);
 		glBindBuffer(GL_ARRAY_BUFFER, NULL);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER_ARB, NULL);
         

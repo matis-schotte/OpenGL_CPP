@@ -79,7 +79,7 @@ bool BoxObjectLogic::advance( ::controller::Logic& l, ::controller::InputEventHa
     _model->setPosition(pneu);
     
     // Bonus-Aufgabe, gesucht: a, v, angle
-    double abneu = _model->rotAcceleration()*0.3 + aext(0)*60;
+    double abneu = _model->rotAcceleration()*0.3 + aext(0)*10;
     double vbneu = _model->rotVelocity() + abneu*dt;
     double angle = _model->angle() + vbneu*dt;
     

@@ -29,6 +29,7 @@ namespace flappy_box
             std::shared_ptr< flappy_box::model::Paddle > paddle;
             
             bool _shallRestartTheGame;
+            bool _gameOverScreen;
             
             std::random_device rd;
             std::uniform_int_distribution<int> xKoord,boxSize,newBoxTime;

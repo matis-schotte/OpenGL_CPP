@@ -18,6 +18,8 @@ namespace flappy_box
             virtual void visualize( ::view::GlRenderer&, ::view::GlutWindow& ) override;
             
         private:
+            void renderBitmapString(const char *string);
+            
             std::shared_ptr< model::GameOver const > _model;
             std::vector<tinyobj::shape_t> shapes;
             

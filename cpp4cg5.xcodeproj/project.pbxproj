@@ -56,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		1A5F6A64195B1EC6005EF12B /* cpp4cg5 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cpp4cg5; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A7DAA911975E29300B560C7 /* world.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = world.obj; sourceTree = "<group>"; };
 		1AA28588195B204C00069C1A /* engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = engine.hpp; sourceTree = "<group>"; };
 		1AA28589195B204C00069C1A /* glut_engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = glut_engine.hpp; sourceTree = "<group>"; };
 		1AA2858A195B204C00069C1A /* input_event_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = input_event_handler.hpp; sourceTree = "<group>"; };
@@ -155,6 +156,7 @@
 		1A5F6A59195B1EC6005EF12B = {
 			isa = PBXGroup;
 			children = (
+				1A7DAA911975E29300B560C7 /* world.obj */,
 				1ADB994A1966286E00AFE265 /* cessna.obj */,
 				1ADB994B1966286E00AFE265 /* cube.obj */,
 				1AA28586195B204C00069C1A /* include */,

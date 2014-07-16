@@ -21,6 +21,9 @@ namespace flappy_box
             const int& remainingLives() const { return _remainingLives; }
             void setRemainingLives( const int& r ) { _remainingLives = r; }
             
+            const bool& shouldRestart() const { return _shouldRestart; }
+            void setShouldRestart( const bool& r ) { _shouldRestart = r; }
+            
             const double getWorldHalfHeight() const { return 30.0; }; /* gibt die halbe Ausdehnung der Spielwelt in z-Richtung zurück */
             const double getWorldHalfWidth() const { return 42.0; }; /* gibt die halbe Ausdehnung der Spielwelt in x-Richtung zurück */
             
@@ -28,6 +31,7 @@ namespace flappy_box
             
             int                  _playerPoints;
             int                _remainingLives;
+            bool                _shouldRestart;
             
         }; // World
         

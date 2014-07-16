@@ -27,6 +27,7 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     vec3_type aneu = _model->playerControl()*1000; // Skalierung=1000
     vec3_type vneu = valt*0.8 + aneu*dt; // decay=0.8
     if(vneu(0) > 100.) vneu(0) = 100.; // limit speed to 100.
+    if(vneu(0) < -100.) vneu(0) = -100.;
     vec3_type pneu = palt + vneu*dt;
     
     //_model->size();
@@ -47,7 +48,7 @@ bool PaddleLogic::advance( ::controller::Logic& l, ::controller::InputEventHandl
     
 	double t = l.game_model()->timestep().count();
 	double bladesAngle = _model->bladesAngle();
-	bladesAngle += 250 * t; // changed from 720
+	bladesAngle += 720 * t;
 	bladesAngle = bladesAngle - ((static_cast<int>(bladesAngle) / 360) * 360); // avoid overflow
 	_model->setBladesAngle(bladesAngle);
 
